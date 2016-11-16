@@ -1,0 +1,26 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    title DeOS
+    link(type="text/css"
+         rel="stylesheet"
+         href="node_modules/font-awesome/css/font-awesome.min.css")
+    link(type="text/css"
+         rel="stylesheet"
+         href="node_modules/bootstrap/dist/css/bootstrap.min.css")
+    script.
+      if (!process.env.HOT) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'index.min.css';
+        document.write(link.outerHTML); }
+  body
+    div(id="root")
+    script.
+      { const script = document.createElement('script');
+        const port = process.env.PORT || 3000;
+        script.src = (process.env.HOT)
+                   ? `http://localhost:${port}/bundle.min.js`
+                   : 'bundle.min.js';
+        document.write(script.outerHTML); }

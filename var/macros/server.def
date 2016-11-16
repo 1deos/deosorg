@@ -1,0 +1,12 @@
+X("#!/usr/bin/env python\n" \
+  "# -*- coding: utf-8 -*-\n" \
+  "import web\n" \
+  "web.config.debug = False\n" \
+  "urls = ('/', 'index')\n" \
+  "class index:\n" \
+  "    def GET(self):\n" \
+  "        return 'yo, world!'\n" \
+  "app = web.application(urls, globals())\n" \
+  "if __name__ == \"__main__\":\n" \
+  "    app.run()\n")
+#undef X

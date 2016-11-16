@@ -1,0 +1,96 @@
+#[DeOS Environment]
+IS_FALSE=0
+IS_MAC=Darwin
+IS_TRUE=1
+
+#[System]
+DEOS_APP_NAME=freebird
+DEOS_ASMJS=$(IS_FALSE)
+DEOS_CLEAN_ALL=$(IS_FALSE)
+DEOS_DEBUG=$(IS_TRUE)
+DEOS_HOST_OS=$(shell uname -s)
+
+#[Paths]
+PATH_BASE=$(CURDIR)
+PATH_APP=$(PATH_BASE)/app
+PATH_BIN=$(PATH_BASE)/bin
+PATH_BUILD=$(PATH_BASE)/build
+PATH_CONFIG=$(PATH_BASE)/config
+PATH_DOC=$(PATH_BASE)/doc
+PATH_DOJO=$(PATH_BASE)/dojo
+PATH_EXT=$(PATH_BASE)/ext
+PATH_INSTALL=$(PATH_BASE)/install
+PATH_LIB=$(PATH_BASE)/lib
+PATH_MACRO=$(PATH_LIB)/macro
+PATH_OBJ=$(PATH_BUILD)/obj
+PATH_SRC=$(PATH_BASE)/src
+PATH_STATIC=$(PATH_BASE)/static
+PATH_TMP=$(PATH_BASE)/tmp
+PATH_TEMPLATES=$(PATH_LIB)/templates
+PATH_WIKI=$(PATH_DOC)/wiki
+PATH_ZT=$(PATH_BASE)/zerotier
+
+#[Executables]
+PIP=$(shell which pip2.7)
+PRINT=$(PATH_BIN)/printm
+PY=$(shell which python2.7)
+SH=$(shell which bash)
+VENV=$(shell which virtualenv)
+
+#[Compiler Settings]
+ifeq ($(DEOS_HOST_OS),$(IS_MAC))
+CC=clang
+else
+CC=gcc
+endif
+ifeq ($(DEOS_ASMJS),$(IS_TRUE))
+CC=emcc
+endif
+CFLAGS=-Wall -g
+CLINKS=
+PY_CFLAGS=
+PY_CLINKS=
+ifeq ($(DEOS_ASMJS),$(IS_TRUE))
+EXE=$(DEOS_APP_NAME).html
+else
+EXE=$(DEOS_APP_NAME)
+endif
+
+#[MacOS]
+MACOS_SIERRA="$(PATH_EXT)/sierra.app"
+OSX_ELCAPITAN="$(PATH_EXT)/elcapitan.app"
+OSX_YOSEMITE="$(PATH_EXT)/yosemite.app"
+
+#[Make]
+A=start
+Z=stop
+#ifeq ($(DEOS_ASMJS),$(IS_TRUE))
+FILES=\
+$(PATH_SRC)/atdlib/deArray.c\
+$(PATH_SRC)/atdlib/deContainer.c\
+$(PATH_SRC)/atdlib/deGroup.c\
+$(PATH_SRC)/atdlib/deList.c\
+$(PATH_SRC)/atdlib/deListNode.c\
+$(PATH_SRC)/atdlib/deNode.c\
+$(PATH_SRC)/atdlib/deObject.c\
+$(PATH_SRC)/atdlib/deOS.c\
+$(PATH_SRC)/atdlib/deShell.c\
+$(PATH_SRC)/atdlib/deTree.c\
+$(PATH_SRC)/atdlib/deTreeNode.c\
+$(PATH_SRC)/atdlib/deUser.c
+#else
+#FILES  = $(wildcard $(PATH_SRC)/*.c)
+#endif
+OBJECTS = $(patsubst $(PATH_SRC)/atdlib/%,\
+                     $(PATH_OBJ)/%,\
+                     $(FILES:.c=.o))
+
+#[DeOS Profile]
+include .deos_profile.example
+
+#[Module Rules]
+include config/deos.rules.deos.mk
+include config/deos.rules.dht.mk
+include config/deos.rules.wikid.mk
+include config/deos.rules.vagrant.mk
+include config/deos.rules.yarn.mk

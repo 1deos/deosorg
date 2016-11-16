@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "css-loader": "^0.25.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2",
+    "webtorrent": "^0.97.2"
+  },
+  "license": "BSD-2-Clause",
+  "main": "index.js",
+  "name": "deos",
+  "scripts": {
+    "all": "webpack-dev-server --progress",
+    "build": "webpack --progress --colors",
+    "clean": "rm -rf bundle.js",
+    "watch": "webpack --progress --colors --watch"
+  },
+  "version": "1.0.0"
+}

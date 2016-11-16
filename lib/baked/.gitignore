@@ -1,0 +1,6 @@
+#[ignore]
+*
+
+#[except]
+!.gitignore
+!README.md
