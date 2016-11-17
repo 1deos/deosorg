@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/DeSantisInc/DeOS.svg?branch=atd-travis-release)](https://travis-ci.org/DeSantisInc/DeOS) ![License](https://img.shields.io/pypi/l/Django.svg) [![Slack Signup](https://img.shields.io/badge/slack-signup-orange.svg?style=flat)](https://desantis.im)
+[![Build Status](https://travis-ci.org/DeSantisInc/DeOS.svg?branch=atd-travis-release)](https://travis-ci.org/DeSantisInc/DeOS) [![Community](https://img.shields.io/badge/community-slack-orange.svg?style=flat)](https://desantis.im) ![License](https://img.shields.io/pypi/l/Django.svg)
 
 
 # [ΔOS: Decentralized Operating System](https://www.desantis.io)
