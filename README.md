@@ -1,10 +1,11 @@
+[![Build Status](https://travis-ci.org/DeSantisInc/DeOS.svg?branch=atd-travis-release)](https://travis-ci.org/DeSantisInc/DeOS) ![License](https://img.shields.io/pypi/l/Django.svg) [![Slack Signup](https://img.shields.io/badge/slack-signup-orange.svg?style=flat)](https://desantis.im)
+
+
 # [ΔOS: Decentralized Operating System](https://www.desantis.io)
 
 > *The languages of intelligence (writing) and self-interest (money) are the*
 > *minds greatest creations; both must be decentralized or all is lost.*
 > **[—DeSantis](https://twitter.com/desantis/status/795023340704595968)**
-
-[![Build Status](https://travis-ci.org/DeSantisInc/DeOS.svg?branch=atd-travis-release)](https://travis-ci.org/DeSantisInc/DeOS) ![License](https://img.shields.io/pypi/l/Django.svg) [![Slack Signup](https://img.shields.io/badge/slack-signup-orange.svg?style=flat)](https://desantis.im)
 
 ## Getting Started
 
