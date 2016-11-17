@@ -4,7 +4,7 @@
 > *minds greatest creations; both must be decentralized or all is lost.*
 > **[—DeSantis](https://twitter.com/desantis/status/795023340704595968)**
 
-[![Build Status](https://travis-ci.org/DeSantisInc/DeOS.svg?branch=atd-travis-release)](https://travis-ci.org/DeSantisInc/DeOS)
+[![Build Status](https://travis-ci.org/DeSantisInc/DeOS.svg?branch=atd-travis-release)](https://travis-ci.org/DeSantisInc/DeOS) [![Slack Signup](https://img.shields.io/badge/slack-signup-orange.svg?style=flat)](https://desantis.im)
 
 ## Getting Started
 
