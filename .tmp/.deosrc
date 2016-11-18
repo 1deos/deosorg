@@ -86,7 +86,7 @@ OBJECTS = $(patsubst $(PATH_SRC)/atdlib/%,\
                      $(FILES:.c=.o))
 
 #[DeOS Profile]
-include .deos_profile.example
+include .deos_profile
 
 #[Module Rules]
 include config/deos.rules.deos.mk

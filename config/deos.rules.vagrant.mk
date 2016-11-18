@@ -10,7 +10,7 @@ vagrant.up: $(PATH_BASE)/Vagrantfile
 	-cd $(PATH_BASE) && vagrant up
 
 $(PATH_BASE)/Vagrantfile: $(PATH_BASE)/.vagrant
-	-cd $(PATH_BASE) && vagrant init osx
+	-cd $(PATH_BASE) && vagrant init ubuntu/trusty64
 
 $(PATH_BASE)/.vagrant:
 	-rm -rf $(PATH_BASE)/.vagrant/

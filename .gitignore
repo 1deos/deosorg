@@ -1,5 +1,4 @@
 #[dotfiles]
-.deos_history
 .DS_Store
 
 #[files]
@@ -14,6 +13,7 @@ src/env.json
 yarn-error.log
 
 #[folders]
+.nvm/
 .vagrant/
 node_modules/
 
