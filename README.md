@@ -18,18 +18,4 @@
 Δ make
 ```
 
-## Command Examples
-
-### `make deos`
-
-![make-deos](https://github.com/DeSantisInc/DeOS/raw/atd-travis-release/var/github/deos-tty-make-deos.gif)
-
-### `make dev`
-
-![make-dev](https://github.com/DeSantisInc/DeOS/raw/atd-travis-release/var/github/deos-tty-make-dev.gif)
-
-### `make wikid`
-
-![make-wikid](https://github.com/DeSantisInc/DeOS/raw/atd-travis-release/var/github/deos-tty-make-wikid.gif)
-
 ---
