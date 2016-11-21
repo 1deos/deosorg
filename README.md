@@ -9,7 +9,7 @@
 ### Install:
 
 ```sh
-Δ git clone git@github.com:desantis/DeOS.git
+Δ git clone git@github.com:DeSantisInc/DeOS.git
 ```
 
 ### Run:
