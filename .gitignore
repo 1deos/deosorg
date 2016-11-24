@@ -2,19 +2,15 @@
 .DS_Store
 
 #[files]
-app/bundle.min.js*
-app/env.json
-app/index.min.html
-app/index.min.js*
-app/main.min.js*
-app/style.min.css*
+/app/bundle.js*
 npm-debug.log
-src/env.json
 yarn-error.log
 
-#[folders]
+#[dotfolders]
 .nvm/
 .vagrant/
+
+#[folders]
 node_modules/
 
 #[wildcards]

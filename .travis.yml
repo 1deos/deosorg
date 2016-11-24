@@ -1,15 +1,22 @@
-sudo: false
 dist: trusty
-os: linux
+
 language: generic
+
+os: linux
+
+sudo: false
 
 before_install:
   - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
+
 install:
   - nvm install && nvm use && npm install --global yarn && yarn install
+
 before_script:
   - export PATH="$PATH:$HOME/.yarn/bin"
+
 script:
-  - make all
+  - make travis
+
 after_script:
   - echo $TRAVIS_COMMIT_RANGE

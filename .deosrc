@@ -13,8 +13,19 @@ DEOS_HOST_OS=$(shell uname -s)
 
 #[Paths]
 PATH_BASE=$(CURDIR)
+PATH_APP=$(PATH_BASE)/app
 PATH_BIN=$(PATH_BASE)/bin
+PATH_CONFIG=$(PATH_BASE)/config
+PATH_DOC=$(PATH_BASE)/doc
 PATH_DOJO=$(PATH_BASE)/dojo
+PATH_EXT=$(PATH_BASE)/ext
+PATH_LIB=$(PATH_BASE)/src
+PATH_SRC=$(PATH_BASE)/src
+PATH_TMP=$(PATH_BASE)/.tmp
+PATH_WIKI=$(PATH_DOC)/wiki
+PATH_VAR=$(PATH_BASE)/var
+PATH_BUILD=$(PATH_VAR)/build
+PATH_OBJ=$(PATH_BUILD)/obj
 
 #[Executables]
 PIP=$(shell which pip2.7)
@@ -42,8 +53,38 @@ else
 EXE=$(DEOS_APP_NAME)
 endif
 
+#[Make]
+A=start
+Z=stop
+VM_CMD="cd /vagrant; bash -i -c 'ipython --profile=vagrant'"
+#ifeq ($(DEOS_ASMJS),$(IS_TRUE))
+FILES=\
+$(PATH_SRC)/deArray.c\
+$(PATH_SRC)/deContainer.c\
+$(PATH_SRC)/deGroup.c\
+$(PATH_SRC)/deList.c\
+$(PATH_SRC)/deListNode.c\
+$(PATH_SRC)/deNode.c\
+$(PATH_SRC)/deObject.c\
+$(PATH_SRC)/deOS.c\
+$(PATH_SRC)/deShell.c\
+$(PATH_SRC)/deTree.c\
+$(PATH_SRC)/deTreeNode.c\
+$(PATH_SRC)/deUser.c
+#else
+#FILES  = $(wildcard $(PATH_SRC)/*.c)
+#endif
+OBJECTS = $(patsubst $(PATH_SRC)/%,\
+                     $(PATH_OBJ)/%,\
+                     $(FILES:.c=.o))
+
 #[DeOS Profile]
 include .deos_profile
 
 #[Drivers]
-include config/deos.rules.vagrant.mk
+include etc/deos/logic.mk
+include etc/deos/dht.mk
+include etc/deos/vagrant.mk
+include etc/deos/yarn.mk
+
+

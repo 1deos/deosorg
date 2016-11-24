@@ -1,32 +1,25 @@
 export MAKEFLAGS=--no-print-directory
 
 .DEFAULT_GOAL:=all
-.PHONY: all build dev test ssh
+
+.PHONY: all build logic ssh start vm
+
 .SUBLIME_TARGETS: all
 
 include .deosrc
 
-all: build
-	@$(PRINT) purple $@ start
-	$(PATH_BIN)/deos
-	@$(PRINT) purple $@ stop
+all: logic
 
-test:
-	nvm --version
+down:; (vagrant destroy DeVM)
 
-build:
-	@chmod +x $(PRINT)
-	@$(PRINT) yellow $@ start
-	$(CC) -std=c89 -Wall -g -pthread $(PATH_DOJO)/main.c -o $(PATH_BIN)/deos
-	chmod +x $(PATH_BIN)/deos
-	@$(PRINT) yellow $@ stop
+ssh:; (open ./dojo/index.html && vagrant ssh -c $(VM_CMD) DeVM)
 
-dev: #down
-	vagrant up
-	$(MAKE) ssh
+start:; (yarn start)
 
-ssh:
-	vagrant ssh -c "cd /vagrant; bash -i -c 'ipython --profile=vagrant'"
+test:; (yarn test)
 
-down:
-	vagrant destroy
+travis: logic.travis
+
+vm:; (vagrant up; $(MAKE) ssh)
+
+webpack:; (yarn all)

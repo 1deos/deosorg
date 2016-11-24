@@ -3,5 +3,4 @@
 
 #[except this file]
 !.gitignore
-!README.md
 !printm

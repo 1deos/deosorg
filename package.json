@@ -1,19 +1,76 @@
 {
+  "babel": {
+    "presets": [
+      "flow",
+      "latest",
+      "react"
+    ]
+  },
   "dependencies": {
-    "css-loader": "^0.25.0",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.13.3",
-    "webpack-dev-server": "^1.16.2",
-    "webtorrent": "^0.97.2"
+    "babel-polyfill": "^6.16.0",
+    "immutable": "^3.8.1",
+    "react": "^15.4.0",
+    "react-dom": "^15.4.0",
+    "react-redux": "^4.4.6",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.0.1",
+    "redux-immutable": "^3.0.8"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.8",
+    "babel-preset-flow": "^1.0.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "chai": "^3.5.0",
+    "del": "^2.2.2",
+    "eslint": "^3.10.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-flowtype": "^2.25.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-react": "^6.7.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-eslint": "^3.0.1",
+    "gulp-flowtype": "^1.0.0",
+    "gulp-mocha": "^3.0.1",
+    "mocha": "^3.1.2",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0",
+    "webpack-stream": "^3.2.0"
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true
+    },
+    "extends": [
+      "airbnb"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+      "flowtype",
+      "import"
+    ],
+    "rules": {
+      "comma-dangle": "off",
+      "new-cap": [
+        2,
+        {
+          "capIsNewExceptions": [
+            "Map",
+            "List"
+          ]
+        }
+      ]
+    }
   },
   "license": "BSD-2-Clause",
   "main": "index.js",
   "name": "deos",
   "scripts": {
-    "all": "webpack-dev-server --progress",
-    "build": "webpack --progress --colors",
-    "clean": "rm -rf bundle.js",
-    "watch": "webpack --progress --colors --watch"
+    "start": "gulp",
+    "test": "gulp test"
   },
-  "version": "1.0.0"
+  "version": "0.3.0"
 }
