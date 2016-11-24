@@ -2,11 +2,15 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
+
   config.vm.box = "ubuntu/trusty64"
+
   config.vm.network :forwarded_port, guest:80, host:1337
+
   config.vm.network :forwarded_port, guest:8888, host:1321
-  config.vm.define :DeVM do |t|
-  end
+
+  config.vm.define :DeVM do |t| end
+
   config.vm.provision :shell, inline:<<-SHELL
     apt-get update
     apt-get install -y build-essential
@@ -18,6 +22,7 @@ Vagrant.configure("2") do |config|
     apt-get install -y ca-certificates
     apt-get install -y git
   SHELL
+
   config.vm.provision :shell, inline:<<-SHELL
     apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 \
                 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -32,6 +37,7 @@ Vagrant.configure("2") do |config|
     sudo groupadd docker
     sudo usermod -aG docker $USER
   SHELL
+
   config.vm.provision :shell, inline:<<-SHELL
     sudo apt-get install -y nginx
     rm /etc/nginx/nginx.conf
@@ -43,6 +49,7 @@ Vagrant.configure("2") do |config|
     fi
     sudo service nginx reload
   SHELL
+
   config.vm.provision :shell, inline:<<-SHELL
     apt-get install -y python2.7
     apt-get install -y python-pip
@@ -59,6 +66,7 @@ Vagrant.configure("2") do |config|
     pip install docker-compose
     ipcluster nbextension enable
   SHELL
+
   config.vm.provision :shell, privileged:false, inline:<<-SHELL
     ipython profile create vagrant
     if ! [ -L /home/vagrant/.ipython/profile_vagrant/ipython_config.py ]; then
@@ -67,6 +75,7 @@ Vagrant.configure("2") do |config|
             /home/vagrant/.ipython/profile_vagrant/ipython_config.py
     fi
   SHELL
+
   config.vm.provision :shell, privileged:false, inline:<<-SHELL
     cd /home/vagrant
     wget -qO- https://raw.github.com/creationix/nvm/v0.32.1/install.sh | sh
@@ -80,9 +89,11 @@ Vagrant.configure("2") do |config|
                 && yarn install
     export PATH="$PATH:$HOME/.yarn/bin"
   SHELL
+
   config.vm.provision :shell, privileged:false, run:"always", inline:<<-SHELL
     jupyter notebook --notebook-dir=/vagrant/var/notebook \
                      --no-browser \
                      --ip=0.0.0.0 &
   SHELL
+
 end

@@ -8,13 +8,16 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0",
+    "css-loader": "^0.26.0",
     "immutable": "^3.8.1",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
     "react-redux": "^4.4.6",
     "redux": "^3.6.0",
     "redux-actions": "^1.0.1",
-    "redux-immutable": "^3.0.8"
+    "redux-immutable": "^3.0.8",
+    "style-loader": "^0.13.1",
+    "webpack-dev-server": "^1.16.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -69,6 +72,7 @@
   "main": "index.js",
   "name": "deos",
   "scripts": {
+    "all": "webpack-dev-server --inline --hot --progress --host 0.0.0.0 --port 8282 --watch-poll",
     "start": "gulp",
     "test": "gulp test"
   },
