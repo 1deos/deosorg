@@ -56,7 +56,7 @@
       "import"
     ],
     "rules": {
-      "comma-dangle": false,
+      "comma-dangle": "off",
       "new-cap": [
         2,
         {
