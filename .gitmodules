@@ -22,9 +22,3 @@
 [submodule "ext/DeDNS"]
 	path = ext/DeDNS
 	url = https://github.com/DeSantisInc/DeDNS.git
-[submodule "root/sh/bitcoin"]
-	path = root/sh/bitcoin
-	url = https://github.com/DeSantisInc/bitcoin.sh.git
-[submodule "root/news/code"]
-	path = root/news/code
-	url = https://github.com/DeSantisInc/code.news.git
