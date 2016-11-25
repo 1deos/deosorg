@@ -6,14 +6,11 @@ services:
 
     build: .
 
-    ports:
-     - "5000:5000"
+    ports: "5000:5000"
 
-    volumes:
-     - .:/code
+    volumes: .:/code
 
-    depends_on:
-     - redis
+    depends_on: redis
 
   redis:
 

@@ -6,7 +6,7 @@ export const paths = {
       "client": "var/build/es5/client",
       "server": "var/build/es5/server",
       "shared": "var/build/es5/shared",
-      "test": "build/es5/test"
+      "test": "var/build/es5/test"
     }
   },
   "files": {

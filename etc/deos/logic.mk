@@ -9,7 +9,7 @@ logic.build: logic.clean $(OBJECTS)
 	$(CC) -std=c89 -Wall -g\
 		-pthread\
 		-I$(PATH_LIB)\
-		$(PATH_DOJO)/main.c\
+		$(PATH_SRC)/main.c\
 		$(OBJECTS)\
 		-o $(PATH_BIN)/logic
 	chmod +x $(PATH_BIN)/logic

@@ -16,6 +16,7 @@ Vagrant.configure("2") do |config|
     apt-get install -y build-essential
     apt-get install -y llvm
     apt-get install -y clang-3.4
+    apt-get install -y ntp
     apt-get install -y libffi-dev
     apt-get install -y libssl-dev
     apt-get install -y apt-transport-https

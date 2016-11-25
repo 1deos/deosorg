@@ -12,7 +12,13 @@ all: logic
 
 down:; (vagrant destroy DeVM)
 
-ssh:; (open ./dojo/index.html && vagrant ssh -c $(VM_CMD) DeVM)
+git:; (cd ./ext/DeGIT && make all)
+
+git.lint:; (cd ./ext/DeGIT && make lint)
+
+git.main:; (cd ./ext/DeGIT && make main)
+
+ssh:; (vagrant ssh -c $(VM_CMD) DeVM)
 
 start:; (yarn start)
 
