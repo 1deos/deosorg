@@ -4,9 +4,6 @@
 [submodule "ext/DeWIKI"]
 	path = ext/DeWIKI
 	url = https://github.com/DeSantisInc/DeWIKI.git
-[submodule "ext/DeGIT"]
-	path = ext/DeGIT
-	url = https://github.com/DeSantisInc/DeGIT.git
 [submodule "ext/DeWEB"]
 	path = ext/DeWEB
 	url = https://github.com/DeSantisInc/DeWEB.git
@@ -22,3 +19,6 @@
 [submodule "ext/DeDNS"]
 	path = ext/DeDNS
 	url = https://github.com/DeSantisInc/DeDNS.git
+[submodule "ext/DeGIT"]
+	path = ext/DeGIT
+	url = https://github.com/DeSantisInc/DeGIT.git

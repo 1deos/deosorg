@@ -8,7 +8,7 @@ export default validate(merge(baseConfig, {
   devtool: 'source-map',
   entry: [
     'babel-polyfill',
-    './src/main.js',
+    './src/renderer/main.js',
   ],
   externals: [
     'source-map-support',

@@ -1,5 +1,5 @@
-#[folders]
+# Folders
 node_modules/
 
-#[files]
-/app/bundle.js*
+# Files
+app/main.min.js

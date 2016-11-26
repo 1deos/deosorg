@@ -15,7 +15,7 @@
 ### Run:
 
 ```sh
-Δ make
+Δ make vm
 ```
 
 If you encounter an error message like below:
@@ -31,7 +31,7 @@ box on HashiCorp's Atlas, please verify you're logged in via
 URL and error message are shown below:
 
 URL: ["https://atlas.hashicorp.com/ubuntu/trusty64"]
-Error: 
+Error:
 ```
 
 Try the solution here: http://stackoverflow.com/a/40521433

@@ -22,7 +22,7 @@ export default validate({
   output: {
     filename: 'bundle.min.js',
     libraryTarget: 'commonjs2',
-    path: path.join(__dirname, '../app/')
+    path: path.join(__dirname, '../../app/')
   },
   plugins: [],
   resolve: {

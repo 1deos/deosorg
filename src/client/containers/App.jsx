@@ -2,14 +2,14 @@
 
 import React, { Component, PropTypes } from 'react';
 
-export default class Message extends Component {
+export default class App extends Component {
   static propTypes = {
-    message: PropTypes.string.isRequired,
+    children: PropTypes.element.isRequired,
   };
   render() {
     return (
       <div>
-        {this.props.message}
+        {this.props.children}
       </div>
     );
   }

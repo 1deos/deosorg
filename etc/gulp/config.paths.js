@@ -13,11 +13,19 @@ export const paths = {
     "client": {
       "all": "src/client/**/*.js?(x)",
       "bundle": "app/bundle.js?(.map)",
-      "entry": "src/client/app.jsx"
+      "entry": "src/client/index.jsx",
+      "pug": {
+        "out": "index.min.html",
+        "in": "src/client/index.pug"
+      }
     },
     "config": {
       "gulp": "Gulpfile.babel.js",
-      "webpack": "etc/gulp/webpack.config.babel.js"
+      "webpack": {
+        "dev": "etc/webpack/config.dev.js",
+        "electron": "etc/webpack/config.electron.js",
+        "prod": "etc/webpack/config.prod.js"
+      }
     },
     "server": {
       "all": "src/server/**/*.js?(x)"
@@ -32,17 +40,20 @@ export const paths = {
 };
 
 export const allConfigJS = [
+  paths.files.config.webpack.dev,
+  paths.files.config.webpack.electron,
+  paths.files.config.webpack.prod,
   paths.files.config.gulp,
-  paths.files.config.webpack
 ];
 
 export const allSrcJS = 'src/**/*.js?(x)';
 
 export const allJS = [allSrcJS].concat(allConfigJS);
 
-export const buildDeps = ['lint', 'clean'];
+export const buildDeps = ['lint', 'pug', 'clean'];
 
 export const toClean = [
+  `app/${paths.files.client.pug.out}`,
   paths.files.client.bundle,
   paths.dirs.es5.client,
   paths.dirs.es5.server,

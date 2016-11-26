@@ -1,0 +1,40 @@
+#atd_profile_card_link {
+	width: 33%;
+	float: left;
+}
+
+#atd_profile_card_link > p {
+	margin-bottom: 0;
+	font-size: 12px;
+}
+
+#atd_profile_card_block {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#atd_profile_card_info {
+	padding: 0;
+	margin: 0;
+	padding-left: 80px;
+}
+
+#atd_profile_card_info > p {
+	margin-bottom: 8px;
+	font-size: 12px;
+	margin-left: -100px;
+}
+
+#atd_profile_card_img {
+	z-index: 1;
+	top: 76px;
+	left: 14px;
+	position: absolute;
+	height: 70px;
+	width: 70px;
+	background-color: red;
+	border-radius: 5px;
+	background-image: url(https://pbs.twimg.com/profile_images/787883336702173184/eIjgcv_N_400x400.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}

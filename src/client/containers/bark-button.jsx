@@ -1,11 +1,13 @@
 // @flow
 
 import { connect } from 'react-redux';
-import Button from '../components/button';
 import { makeBark } from '../actions/dog-actions';
+import Button from '../components/button';
 
 const mapDispatchToProps = dispatch => ({
-  action: () => { dispatch(makeBark()); },
+  action: () => {
+    dispatch(makeBark());
+  },
   actionLabel: 'Bark',
 });
 

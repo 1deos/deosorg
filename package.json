@@ -1,62 +1,185 @@
 {
+  "author": "Andrew DeSantis <andrew@desantis.email>",
   "babel": {
+    "compact": false,
+    "env": {
+      "dev": {
+        "presets": [
+          "react-hmre"
+        ]
+      },
+      "prod": {
+        "plugins": [
+          "babel-plugin-dev-expression"
+        ],
+        "presets": [
+          "react-optimize"
+        ]
+      }
+    },
+    "plugins": [
+      "add-module-exports"
+    ],
     "presets": [
+      "es2015",
       "flow",
       "latest",
-      "react"
+      "react",
+      "stage-0"
     ]
+  },
+  "build": {
+    "app-category-type": "public.app-category.developer-tools",
+    "appId": "com.desantis.deos-electron",
+    "dmg": {
+      "background": "var/assets/osx/dmg-background.png",
+      "icon": "var/assets/osx/dmg-icon.icns"
+    },
+    "mac": {
+      "icon": "var/assets/osx/icon.icns"
+    },
+    "nsis": {
+      "installerHeaderIcon": "var/assets/windows/setup-icon.ico",
+      "oneClick": true
+    },
+    "win": {
+      "icon": "var/assets/windows/icon.ico",
+      "target": [
+        "nsis"
+      ]
+    }
   },
   "dependencies": {
     "babel-polyfill": "^6.16.0",
-    "css-loader": "^0.26.0",
+    "bootstrap": "4.0.0-alpha.4",
+    "electron": "^1.4.4",
+    "electron-debug": "^1.0.1",
+    "electron-devtools-installer": "^2.0.1",
+    "eslint-formatter-pretty": "^1.1.0",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "font-awesome": "^4.6.3",
+    "fs-jetpack": "^0.10.0",
     "immutable": "^3.8.1",
-    "react": "^15.4.0",
-    "react-dom": "^15.4.0",
-    "react-redux": "^4.4.6",
+    "postcss": "^5.2.5",
+    "react": "^15.3.2",
+    "react-addons-css-transition-group": "^15.3.2",
+    "react-addons-transition-group": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^3.0.0",
+    "react-router-redux": "^4.0.6",
+    "reactstrap": "^3.7.1",
     "redux": "^3.6.0",
-    "redux-actions": "^1.0.1",
+    "redux-actions": "^0.12.0",
     "redux-immutable": "^3.0.8",
-    "style-loader": "^0.13.1",
-    "webpack-dev-server": "^1.16.2"
+    "redux-logger": "^2.7.4",
+    "redux-thunk": "^2.1.0",
+    "source-map-support": "^0.4.5",
+    "webpack": "^1.13.3",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.1",
+    "webpack-merge": "^0.15.0",
+    "webpack-validator": "^2.2.9"
   },
+  "description": "ΔOS: Decentralized Operating System",
   "devDependencies": {
-    "babel-eslint": "^7.1.1",
-    "babel-loader": "^6.2.8",
+    "asar": "^0.12.3",
+    "babel-core": "^6.18.0",
+    "babel-eslint": "^7.1.0",
+    "babel-loader": "^6.2.7",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-dev-expression": "^0.2.1",
+    "babel-plugin-tcomb": "^0.3.21",
+    "babel-plugin-webpack-loaders": "^0.8.0",
+    "babel-polyfill": "^6.16.0",
+    "babel-preset-es2015": "^6.18.0",
     "babel-preset-flow": "^1.0.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-react-optimize": "^1.0.1",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-register": "^6.18.0",
+    "bower": "^1.7.9",
     "chai": "^3.5.0",
+    "concurrently": "^3.1.0",
+    "cross-env": "^3.1.3",
+    "css-loader": "^0.25.0",
+    "css-modules-require-hook": "^4.0.5",
     "del": "^2.2.2",
-    "eslint": "^3.10.2",
-    "eslint-config-airbnb": "^13.0.0",
+    "devtron": "^1.4.0",
+    "electron-builder": "^7.15.2",
+    "electron-mocha": "^3.1.1",
+    "electron-packager": "^8.2.0",
+    "electron-rebuild": "^1.3.0",
+    "enzyme": "^2.5.1",
+    "eslint": "^3.9.0",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-import-resolver-webpack": "^0.6.0",
+    "eslint-loader": "^1.6.0",
     "eslint-plugin-flowtype": "^2.25.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "2.2.3",
-    "eslint-plugin-react": "^6.7.1",
+    "eslint-plugin-flowtype-errors": "^1.5.0",
+    "eslint-plugin-import": "1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-mocha": "^4.7.0",
+    "eslint-plugin-promise": "^3.3.0",
+    "eslint-plugin-react": "^6.4.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "fbjs-scripts": "^0.7.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-eslint": "^3.0.1",
     "gulp-flowtype": "^1.0.0",
     "gulp-mocha": "^3.0.1",
+    "gulp-pug": "^3.1.0",
+    "gulp-rename": "^1.2.2",
+    "istanbul": "^0.4.5",
+    "jsdom": "^9.8.3",
+    "json-loader": "^0.5.4",
+    "minimist": "^1.2.0",
     "mocha": "^3.1.2",
+    "node-libs-browser": "^1.0.0",
+    "node-sass": "^3.10.1",
+    "react-addons-css-transition-group": "^15.3.2",
+    "react-addons-test-utils": "^15.3.2",
+    "react-addons-transition-group": "^15.3.2",
+    "rollup": "^0.36.3",
+    "rollup-plugin-istanbul": "^1.1.0",
+    "sass-loader": "^4.0.2",
     "sinon": "^1.17.6",
     "sinon-chai": "^2.8.0",
-    "webpack-stream": "^3.2.0"
+    "spectron": "^3.4.0",
+    "style-loader": "^0.13.1",
+    "tcomb": "^3.2.15",
+    "webpack-merge": "^0.15.0",
+    "webpack-stream": "^3.2.0",
+    "yargs": "^6.3.0"
+  },
+  "devEngines": {
+    "node": ">=4.x",
+    "npm": ">=3.x"
+  },
+  "directories": {
+    "buildResources": "var/assets"
   },
   "eslintConfig": {
     "env": {
       "browser": true
     },
     "extends": [
-      "airbnb"
+      "airbnb",
+      "plugin:flowtype/recommended"
     ],
     "parser": "babel-eslint",
     "plugins": [
+      "flowtype-errors",
       "flowtype",
-      "import"
+      "import",
+      "promise",
+      "react"
     ],
     "rules": {
-      "comma-dangle": "off",
       "new-cap": [
         2,
         {
@@ -65,14 +188,24 @@
             "List"
           ]
         }
-      ]
+      ],
+      "react/prefer-stateless-function": "off"
     }
   },
   "license": "BSD-2-Clause",
   "main": "index.js",
-  "name": "deos",
+  "name": "DeOS",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:DeSantisInc/DeOS.git"
+  },
   "scripts": {
-    "all": "webpack-dev-server --inline --hot --progress --host 0.0.0.0 --port 8282 --watch-poll",
+    "build": "cross-env NODE_ENV=dev gulp build",
+    "dev": "concurrently --kill-others \"yarn run dev-server\" \"yarn run dev-start\"",
+    "dev-server": "cross-env NODE_ENV=dev node -r babel-register ./src/server/index.js",
+    "dev-start": "cross-env HOT=1 NODE_ENV=dev electron -r babel-register -r babel-polyfill ./src/renderer/main.js",
+    "main": "cross-env NODE_ENV=dev gulp main",
+    "pug": "gulp pug",
     "start": "gulp",
     "test": "gulp test"
   },

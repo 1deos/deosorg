@@ -10,6 +10,14 @@ include .deosrc
 
 all: logic
 
+main:; (yarn run main)
+
+build:; (yarn run build)
+
+install:; (yarn install && cd app && yarn install)
+
+dev:; (yarn run dev)
+
 down:; (vagrant destroy DeVM)
 
 git:; (cd ./ext/DeGIT && make all)
@@ -17,6 +25,8 @@ git:; (cd ./ext/DeGIT && make all)
 git.lint:; (cd ./ext/DeGIT && make lint)
 
 git.main:; (cd ./ext/DeGIT && make main)
+
+pug:; (yarn pug)
 
 ssh:; (vagrant ssh -c $(VM_CMD) DeVM)
 

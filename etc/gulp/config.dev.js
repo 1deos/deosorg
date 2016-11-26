@@ -15,44 +15,44 @@ export default validate(merge(baseConfig, {
   entry: [
     `webpack-hot-middleware/client?path=http://localhost:${port}/__webpack_hmr`,
     'babel-polyfill',
-    './src/index.jsx'
+    './src/client/index.jsx',
   ],
   output: {
-    publicPath: `http://localhost:${port}/`
+    publicPath: `http://localhost:${port}/`,
   },
   module: {
     loaders: [
       {
         test: /\.scss$/,
         loaders: [
-          "style",
-          "css",
-          "sass"
-        ]
+          'style',
+          'css',
+          'sass',
+        ],
       },
       {
         test: /\.global\.css$/,
         loaders: [
           'style-loader',
-          'css-loader?sourceMap'
-        ]
+          'css-loader?sourceMap',
+        ],
       },
       {
         test: /^((?!\.global).)*\.css$/,
         loaders: [
           'style-loader',
-          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'
-        ]
+          'css-loader?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+        ],
       },
-    ]
+    ],
   },
   eslint: { formatter },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('dev')
-    })
+      'process.env.NODE_ENV': JSON.stringify('dev'),
+    }),
   ],
-  target: 'electron-renderer'
+  target: 'electron-renderer',
 }));

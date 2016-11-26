@@ -1,13 +1,19 @@
 // @flow
 
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-const Button = ({ action, actionLabel }: { action: Function, actionLabel: string}) =>
-  <button onClick={action}>{actionLabel}</button>;
+export default class Button extends Component {
 
-Button.propTypes = {
-  action: PropTypes.func.isRequired,
-  actionLabel: PropTypes.string.isRequired,
-};
+  static propTypes = {
+    action: PropTypes.func.isRequired,
+    actionLabel: PropTypes.string.isRequired,
+  };
 
-export default Button;
+  render() {
+    return (
+      <button onClick={this.props.action}>
+        {this.props.actionLabel}
+      </button>
+    );
+  }
+}
