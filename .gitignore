@@ -3,6 +3,7 @@
 
 #[files]
 /app/bundle.js*
+/bin/logic
 npm-debug.log
 yarn-error.log
 

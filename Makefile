@@ -8,7 +8,9 @@ export MAKEFLAGS=--no-print-directory
 
 include .deosrc
 
-all: logic
+all: deos
+
+deos:; (chmod +x bin/deos && clear && ./bin/deos)
 
 main:; (yarn run main)
 
@@ -36,6 +38,12 @@ test:; (yarn test)
 
 travis: logic.travis
 
-vm:; (vagrant up; $(MAKE) ssh)
+#vm:; (vagrant up; $(MAKE) ssh)
+
+vm:; (vagrant up)
+
+vm.ls:; (vagrant ssh -c "cd /vagrant; bash -i -c 'ls'" DeVM)
+
+vm.yarn.install:; (vagrant ssh -c "cd /vagrant; bash -i -c 'yarn install'" DeVM)
 
 webpack:; (yarn all)
