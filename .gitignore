@@ -1,19 +1,12 @@
-#[dotfiles]
+*.o
+*.pyc
+
 .DS_Store
-
-#[files]
-/app/bundle.js*
-/bin/logic
-npm-debug.log
-yarn-error.log
-
-#[dotfolders]
 .nvm/
 .vagrant/
 
-#[folders]
+app/node_modules/
 node_modules/
-
-#[wildcards]
-*.o
-*.pyc
+npm-debug.log
+yarn-error.log
+bin/logic

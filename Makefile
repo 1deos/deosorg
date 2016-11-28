@@ -1,49 +1,21 @@
-export MAKEFLAGS=--no-print-directory
-
-.DEFAULT_GOAL:=all
-
-.PHONY: all build logic ssh start vm
-
-.SUBLIME_TARGETS: all
-
 include .deosrc
 
-all: deos
+all: build; @($(DEOS) && echo)
 
-deos:; (chmod +x bin/deos && clear && ./bin/deos)
+app:; electron ./app/
 
-main:; (yarn run main)
+build: chmod check
 
-build:; (yarn run build)
+check: deos.check; @(echo)
 
-install:; (yarn install && cd app && yarn install)
+chmod:; @(chmod +x $(PRINT) $(DEOS))
 
-dev:; (yarn run dev)
+clean:; -@(rm -rf node_modules/)
 
-down:; (vagrant destroy DeVM)
+down:; @(vagrant destroy DeVM)
 
-git:; (cd ./ext/DeGIT && make all)
+install:; @(yarn global add electron)
 
-git.lint:; (cd ./ext/DeGIT && make lint)
+vm:; @(vagrant up)
 
-git.main:; (cd ./ext/DeGIT && make main)
-
-pug:; (yarn pug)
-
-ssh:; (vagrant ssh -c $(VM_CMD) DeVM)
-
-start:; (yarn start)
-
-test:; (yarn test)
-
-travis: logic.travis
-
-#vm:; (vagrant up; $(MAKE) ssh)
-
-vm:; (vagrant up)
-
-vm.ls:; (vagrant ssh -c "cd /vagrant; bash -i -c 'ls'" DeVM)
-
-vm.yarn.install:; (vagrant ssh -c "cd /vagrant; bash -i -c 'yarn install'" DeVM)
-
-webpack:; (yarn all)
+yarn:; @(yarn all)

@@ -18,17 +18,6 @@ indent_size=2
 [.deos{rc,_profile}]
 indent_style=tab
 
-[.{babelrc,eslintrc}]
-indent_style=space
-indent_size=2
-
-[.env-*]
-indent_style=tab
-
-[binding.gyp]
-indent_style=space
-indent_size=2
-
 [Makefile]
 indent_style=tab
 

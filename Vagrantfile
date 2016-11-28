@@ -4,11 +4,8 @@
 Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/trusty64"
-
   config.vm.network :forwarded_port, guest:80, host:1337
-
   config.vm.network :forwarded_port, guest:8888, host:1321
-
   config.vm.define :DeVM do |t| end
 
   config.vm.provision :shell, inline:<<-SHELL
@@ -43,11 +40,6 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y nginx
     rm /etc/nginx/nginx.conf
     ln -s /vagrant/etc/nginx/nginx.conf /etc/nginx/nginx.conf
-    if ! [ -L /etc/nginx/sites-available/default ]; then
-      rm -rf /etc/nginx/sites-available/default
-      ln -s /vagrant/etc/nginx/sites-available/deos.conf \
-            /etc/nginx/sites-available/deos.conf
-    fi
     sudo service nginx reload
   SHELL
 
@@ -72,7 +64,7 @@ Vagrant.configure("2") do |config|
     ipython profile create vagrant
     if ! [ -L /home/vagrant/.ipython/profile_vagrant/ipython_config.py ]; then
       rm /home/vagrant/.ipython/profile_vagrant/ipython_config.py
-      ln -s /vagrant/etc/ipython/ipython_config.py \
+      ln -s /vagrant/src/ipython/ipython_config.py \
             /home/vagrant/.ipython/profile_vagrant/ipython_config.py
     fi
   SHELL
