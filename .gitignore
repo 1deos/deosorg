@@ -1,12 +1,21 @@
-*.o
-*.pyc
-
+#[dotfiles]
 .DS_Store
+
+#[dotfolders]
 .nvm/
 .vagrant/
 
-app/node_modules/
-node_modules/
+#[files]
+app/bundle.min.js*
+app/index.min.html
+bin/logic
 npm-debug.log
 yarn-error.log
-bin/logic
+
+#[folders]
+app/node_modules/
+node_modules/
+
+#[wildcards]
+*.o
+*.pyc

@@ -8,15 +8,43 @@
 
 ### Install:
 
+#### 1. Clone the repo:
+
 ```sh
 Δ git clone git@github.com:DeSantisInc/DeOS.git
 ```
 
-### Run:
+#### 2. Install Virtualbox:
 
 ```sh
-Δ make
+Δ brew cask install virtualbox
 ```
+
+#### 3. Install Vagrant:
+
+```sh
+Δ brew cask install vagrant
+```
+
+#### 4. Install the Virtual Machine:
+
+```sh
+Δ make vm
+```
+
+#### 5. Connect to the Virtual Machine:
+
+```sh
+Δ make ssh
+```
+
+#### 6. Shutdown the Virtual Machine:
+
+```sh
+Δ make rm
+```
+
+### Known Issues
 
 If you encounter an error message like below:
 

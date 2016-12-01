@@ -9,18 +9,9 @@ html(lang="en")
     link(type="text/css"
          rel="stylesheet"
          href="node_modules/bootstrap/dist/css/bootstrap.min.css")
-    script.
-      if (!process.env.HOT) {
-        const link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = 'index.min.css';
-        document.write(link.outerHTML); }
   body
     div(id="app")
     script.
       { const script = document.createElement('script');
-        const port = process.env.PORT || 3000;
-        script.src = (process.env.HOT)
-                   ? `http://localhost:${port}/bundle.min.js`
-                   : 'bundle.min.js';
+        script.src = 'bundle.min.js';
         document.write(script.outerHTML); }

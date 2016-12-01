@@ -1,7 +1,7 @@
 export MAKEFLAGS=--no-print-directory
 
 .DEFAULT_GOAL:=all
-.PHONY:all app build check chmod clean install vm yarn
+.PHONY:all build chmod clean install
 .SUBLIME_TARGETS:all
 
 BASEDIR:=$(CURDIR)
@@ -10,7 +10,7 @@ LIB:=$(BASEDIR)/src
 SRC:=$(BASEDIR)/src
 DEOS:=$(BASEDIR)/bin/deos
 PRINT:=$(BASEDIR)/bin/printm
-
+VMCMD:="cd /vagrant; bash -i -c 'ipython --profile=vagrant'"
 FILES:=.deosrc\
        .editorconfig\
        .gitattributes\
@@ -49,3 +49,4 @@ FILES:=.deosrc\
        var/build/obj/.gitkeep
 
 include src/deos/test.mk
+include src/deos/vbox.mk

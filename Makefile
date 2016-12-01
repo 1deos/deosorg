@@ -1,6 +1,6 @@
 include .deosrc
 
-all: build; @($(DEOS) && echo)
+all: vm ssh #build; @($(DEOS) && echo)
 
 app:; electron ./app/
 
@@ -8,14 +8,14 @@ build: chmod check
 
 check: deos.check; @(echo)
 
-chmod:; @(chmod +x $(PRINT) $(DEOS))
+chmod:; (chmod +x $(PRINT) $(DEOS))
 
-clean:; -@(rm -rf node_modules/)
+install:; (yarn global add electron)
 
-down:; @(vagrant destroy DeVM)
+gulp:; (yarn run gulp && yarn run test)
 
-install:; @(yarn global add electron)
+rm: vm.uninstall
 
-vm:; @(vagrant up)
+ssh: vm.ssh
 
-yarn:; @(yarn all)
+vm: vm.install
