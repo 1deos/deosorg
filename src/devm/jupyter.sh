@@ -1,27 +1,15 @@
-#!/usr/bin/env bash
+DERUN "apt-get install -y ipython"
+DERUN "apt-get install -y ipython-notebook 2> /dev/null"
+DERUN "pip install jupyter"
+DERUN "pip install ipyparallel"
+DERUN "ipcluster nbextension enable"
+DERUN "ipython profile create deos"
 
-printd() {
-    printf "\x1b[34;01m########[ $1 ]########\x1b[34;01m\n";
-    echo "$1" | bash;
-}
-
-printd "sudo apt-get install -y ipython"
-
-printd "sudo apt-get install -y ipython-notebook"
-
-printd "sudo pip install jupyter"
-
-printd "sudo pip install ipyparallel"
-
-printd "sudo ipcluster nbextension enable"
-
-printd "sudo ipython profile create vagrant"
-
-if [ -L /root/.ipython/profile_vagrant/ipython_kernel_config.py ]; then
-  printd "sudo rm /root/.ipython/profile_vagrant/ipython_kernel_config.py"
+if [ -L /root/.ipython/profile_deos/ipython_kernel_config.py ]; then
+  DERUN "rm /root/.ipython/profile_deos/ipython_kernel_config.py"
 fi
 
-cat <<EOT >> /root/.ipython/profile_vagrant/ipython_kernel_config.py
+cat << EOT >> /root/.ipython/profile_deos/ipython_kernel_config.py
 c = get_config()
 c.StoreMagics.autorestore = True
 c.InteractiveShell.editor = 'vim'
@@ -37,6 +25,7 @@ c.AliasManager.user_aliases = [
 ]
 EOT
 
-sudo jupyter notebook --notebook-dir=/vagrant/var/notebook --no-browser --ip=0.0.0.0 &
+sudo jupyter notebook --notebook-dir=/deos/var/notebook \
+                      --no-browser --ip=0.0.0.0 &
 
-exit 0
+EXIT_SUCCESS

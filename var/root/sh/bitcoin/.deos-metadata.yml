@@ -1,0 +1,31 @@
+name: sh.bitcoin
+
+meta:
+- type: namespace
+- kind: domain
+- identity: false
+
+control:
+- blockstack: false
+- centralized: true
+- dns: true
+- icann: true
+
+registrant:
+  name: DeSantis Inc.
+  meta:
+  - type: company
+  - kind: tech
+
+uris:
+  handlers:
+  - deos://sh.bitcoin/index.html
+  - Δ://sh/bitcoin/index.html
+  hyperlinks:
+  - https://bitcoin.sh
+  - https://Δ.ws/sh/bitcoin
+  keys:
+  - deos:sh:bitcoin:index
+  - Δ:sh:bitcoin:index
+  paths:
+  - /var/root/sh/bitcoin/

@@ -1,22 +1,21 @@
-#!/usr/bin/env bash
+DERUN "apt-get update"
 
-printd() {
-    printf "\x1b[34;01m########[ $1 ]########\x1b[34;01m\n";
-    echo "$1" | bash;
-}
+DERUN "apt-get -y upgrade 2> /dev/null"
 
-printd "sudo apt-get update"
+DERUN "apt-get -y install build-essential 2> /dev/null"
 
-printd "sudo apt-get -y install build-essential 2> /dev/null"
+DERUN "apt-get -y install llvm 2> /dev/null"
 
-printd "sudo apt-get -y install llvm"
+DERUN "apt-get -y install clang 2> /dev/null"
 
-printd "sudo apt-get -y install clang"
+DERUN "apt-get -y install libssl-dev 2> /dev/null"
 
-printd "sudo apt-get -y install libssl-dev 2> /dev/null"
+DERUN "apt-get -y install git 2> /dev/null"
 
-printd "sudo apt-get -y install git 2> /dev/null"
+DERUN "apt-get -y install curl 2> /dev/null"
 
-printd "sudo apt-get -y install curl 2> /dev/null"
+DERUN "apt-get -y install apt-transport-https"
 
-exit 0
+DERUN "apt-get -y install ca-certificates"
+
+EXIT_SUCCESS

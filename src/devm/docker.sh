@@ -1,27 +1,21 @@
-#!/usr/bin/env bash
-
-sudo apt-get update
-
-sudo apt-get install -y apt-transport-https ca-certificates
-
 sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F76221572C52609D
 
 echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
 
-sudo apt-get update
+DERUN "sudo apt-get update"
 
-apt-cache policy docker-engine
+DERUN "sudo apt-get -y install linux-image-extra-$(uname -r)"
 
-sudo apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
+DERUN "sudo apt-get -y install linux-image-extra-virtual 2> /dev/null"
 
-sudo apt-get install -y docker-engine
+DERUN "sudo apt-get -y install docker-engine 2> /dev/null"
 
-sudo service docker start
+DERUN "sudo service docker start"
 
-sudo usermod -aG docker $USER
+DERUN "sudo usermod -aG docker vagrant"
 
-sudo systemctl enable docker
+DERUN "sudo systemctl enable docker"
 
-exit 0
+EXIT_SUCCESS

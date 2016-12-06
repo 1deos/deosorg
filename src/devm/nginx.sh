@@ -1,15 +1,8 @@
-#!/usr/bin/env bash
+DERUN "sudo apt-get install -y nginx 2> /dev/null"
 
-printd() {
-    printf "\x1b[34;01m########[ $1 ]########\x1b[34;01m\n";
-    echo "$1" | bash;
-}
+DERUN "rm /etc/nginx/nginx.conf"
 
-printd "sudo apt-get install -y nginx"
-
-printd "rm /etc/nginx/nginx.conf"
-
-cat <<EOT >> /vagrant/var/docker/nginx/nginx.conf
+cat << EOF >> /deos/var/docker/nginx/nginx.conf
 user www-data;
 worker_processes 4;
 pid /run/nginx.pid;
@@ -30,25 +23,28 @@ http {
     error_log /var/log/nginx/error.log;
     gzip on;
     gzip_disable "msie6";
-    upstream ws_server {
-      server localhost:8282;
+
+    upstream ipython_server {
+      server localhost:8888;
     }
+
     server {
         listen 80;
         server_name localhost;
         location / {
-           proxy_pass http://ws_server/;
-           proxy_redirect off;
-           proxy_http_version 1.1;
-           proxy_set_header Upgrade $http_upgrade;
-           proxy_set_header Connection "upgrade";
+          proxy_pass http://ipython_server/;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade \$http_upgrade;
+          proxy_set_header Connection "upgrade";
         }
     }
 }
-EOT
+EOF
 
-printd "ln -s /vagrant/var/docker/nginx/nginx.conf /etc/nginx/nginx.conf"
+DERUN "ln -s /deos/var/docker/nginx/nginx.conf /etc/nginx/nginx.conf"
 
-printd "sudo service nginx reload"
+DERUN "sudo systemctl reload nginx"
 
-exit 0
+DERUN "sudo systemctl enable nginx"
+
+EXIT_SUCCESS

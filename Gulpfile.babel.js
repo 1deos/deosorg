@@ -11,12 +11,11 @@ import rename from 'gulp-rename';
 import del from 'del';
 import webpack from 'webpack-stream';
 
-import webpackConfig from './src/dejs/webpack.config.babel';
-import { paths, toClean, toLint } from './src/dejs/config.paths';
+import webpackConfig from './src/descript/webpack.config.babel';
+import { paths, toClean, toLint } from './src/descript/config.paths';
 
 gulp.task('clean', () => del(toClean));
 
-// .pipe(eslint.failAfterError())
 gulp.task('lint', ['clean'], () => gulp.src(toLint)
                             .pipe(eslint())
                             .pipe(eslint.format())

@@ -11,6 +11,10 @@ trim_trailing_whitespace=true
 [*.mk]
 indent_style=tab
 
+[*.sh]
+indent_style=space
+indent_size=2
+
 [*.{css,html,hcl,json,js,jsx,pug,yml}]
 indent_style=space
 indent_size=2
