@@ -1,0 +1,18 @@
+key: id:sudo
+type: domain
+kind: name
+who:
+- address: 3DeZdceyxsxaodLkSwUWzwdpG9SGr4vaEC
+- script: a914832abaea4e0533cf4a847f2df3e73a37cc312a1d87
+when:
+- expires: 2018 Dec 29 06:32:31 UTC
+where:
+- deos: deos://sudo.id/
+- path: ~/.deos/root/id/sudo/
+- proxy: https://Δ.ws/id/sudo/
+why:
+- identity: true
+how:
+- bitcoin: true
+- blockstack: true
+- deos: true

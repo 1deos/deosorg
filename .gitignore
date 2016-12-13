@@ -3,15 +3,15 @@
 
 #[dotfolders]
 .nvm/
-.tmp/
 .vagrant/
-.virtualenvs/
+.venv/
 .zerotier/
 
 #[files]
 app/bundle.min.js*
 app/index.min.html
 bin/logic
+bin/main*
 npm-debug.log
 yarn-error.log
 
