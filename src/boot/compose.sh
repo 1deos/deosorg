@@ -1,5 +1,3 @@
 MAINTAINER "atd@bitcoin.sh"
-
-RUN "pip install docker-compose"
-
+PIP_INSTALL "docker-compose"
 EXIT_SUCCESS

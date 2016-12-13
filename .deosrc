@@ -1,4 +1,4 @@
-include src/install/bootstrap.mk
+include src/host/config.mk
 
 export DeOS_BOOT_ARGS_BITCOIN:=-b
 export DeOS_BOOT_ARGS_BLOCKSTACK:=-d
@@ -124,4 +124,4 @@ var/assets/icons/512x512.png\
 var/build/es5/.gitkeep\
 var/build/obj/.gitkeep
 
-include src/install/index.mk
+include src/host/index.mk

@@ -1,4 +1,4 @@
-_PATH=src/install
+_PATH=src/host
 
 include $(_PATH)/bitcoin.mk
 include $(_PATH)/test.mk

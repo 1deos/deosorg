@@ -2,7 +2,9 @@
 .DS_Store
 
 #[dotfolders]
+.ext/
 .nvm/
+.obj/
 .vagrant/
 .venv/
 .zerotier/
@@ -12,6 +14,7 @@ app/bundle.min.js*
 app/index.min.html
 bin/logic
 bin/main*
+build/
 npm-debug.log
 yarn-error.log
 

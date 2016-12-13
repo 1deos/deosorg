@@ -3,3 +3,4 @@
 
 #[except]
 !.gitignore
+!main.py
