@@ -2,7 +2,7 @@ export MAKEFLAGS=--no-print-directory
 
 .DEFAULT_GOAL:=all
 
-.PHONY:all bin build check chmod clean init rm sh venv vm
+.PHONY:all bin bitcoin build check chmod clean init rm sh venv vm
 
 .SUBLIME_TARGETS:all
 
@@ -16,6 +16,8 @@ else
 	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
 endif
 	@$(PRINT) cyan $@ stop
+
+bitcoin:; (sh src/bitcoin.sh)
 
 init:
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
