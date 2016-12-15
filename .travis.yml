@@ -16,7 +16,7 @@ before_script:
   - export PATH="$PATH:$HOME/.yarn/bin"
 
 script:
-  - make build
+  - make check
 
 after_script:
   - echo $TRAVIS_COMMIT_RANGE

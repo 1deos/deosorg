@@ -1,6 +1,0 @@
-#[ignore]
-*
-
-#[except]
-!.gitignore
-!main.py

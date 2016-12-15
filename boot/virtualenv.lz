@@ -5,7 +5,6 @@ RUN "source /deos/venv/linux/python/bin/activate && pip install -r /deos/require
 cat << EOF >> /deos/venv/linux/python/.gitignore
 #[ignore]
 *
-
 #[except]
 !.gitignore
 EOF

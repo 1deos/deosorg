@@ -1,5 +1,4 @@
 MAINTAINER "atd@bitcoin.sh"
-
 RUN "touch $DOCKER_PY_PATH/app.py"\
 && cat <<EOF>> $DOCKER_PY_PATH/app.py
 #!/usr/bin/env python
@@ -19,13 +18,11 @@ def hello():
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
 EOF
-
 RUN "touch $DOCKER_PY_PATH/requirements.txt"\
 && cat <<EOF>> $DOCKER_PY_PATH/requirements.txt
 flask
 redis
 EOF
-
 RUN "touch $DOCKER_PY_PATH/Dockerfile"\
 && cat <<EOF>> $DOCKER_PY_PATH/Dockerfile
 FROM python:2.7
@@ -34,7 +31,6 @@ WORKDIR /code
 RUN pip install -r requirements.txt
 CMD python app.py
 EOF
-
 RUN "touch $DOCKER_PY_PATH/docker-compose.yml"\
 && cat <<EOF>> $DOCKER_PY_PATH/docker-compose.yml
 version: '2'
@@ -50,9 +46,6 @@ services:
   redis:
     image: redis
 EOF
-
 RUN "cd $DOCKER_PY_PATH && docker-compose build"
-
 RUN "cd $DOCKER_PY_PATH && docker-compose up -d"
-
 EXIT_SUCCESS

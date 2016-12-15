@@ -6,5 +6,5 @@ PIP_INSTALL "ndg-httpsclient"
 PIP_INSTALL "pyasn1"
 PIP_UPGRADE "requests[security]"
 PIP_INSTALL "virtualenv"
-RUN "cd /deos/.venv/linux/ && virtualenv default --no-site-packages"
+RUN "cd /deos/.deos/venv/linux/ && virtualenv default --no-site-packages"
 EXIT_SUCCESS

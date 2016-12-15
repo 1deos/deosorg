@@ -11,7 +11,7 @@ trim_trailing_whitespace=true
 [*.mk]
 indent_style=tab
 
-[*.sh]
+[*.{lz,sh}]
 indent_style=space
 indent_size=2
 
@@ -19,8 +19,12 @@ indent_size=2
 indent_style=space
 indent_size=2
 
-[.deos{rc,_profile}]
+[.deosrc]
 indent_style=tab
+
+[Deosfile]
+indent_style=space
+indent_size=2
 
 [Makefile]
 indent_style=tab

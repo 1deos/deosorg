@@ -17,13 +17,13 @@
 #### 2. Install Vagrant:
 
 ```sh
-Δ brew cask install vagrant --appdir=/Applications
+Δ brew cask install vagrant
 ```
 
 #### 3. Install Virtualbox:
 
 ```sh
-Δ brew cask install virtualbox --appdir=/Applications
+Δ brew cask install virtualbox
 ```
 
 #### 4. Install the Virtual Machine:

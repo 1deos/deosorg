@@ -1,45 +1,61 @@
+Δ with (data=None)
+
 include src/host/common.mk
 
 BASEDIR:=$(CURDIR)
 BIN:=$(BASEDIR)/bin
 
-export DeOS_BOOT_ARGS_BITCOIN:=-b
-export DeOS_BOOT_ARGS_BLOCKSTACK:=-d
-export DeOS_BOOT_ARGS_BOOTSTRAP:=-a test
-export DeOS_BOOT_ARGS_DOCKER:=-f
-export DeOS_BOOT_ARGS_NGINX:=-e
-export DeOS_BOOT_ARGS_PYTHON:=-c
-export DeOS_BOOT_PATH:=/deos/boot
-export DeOS_BOOT_SCRIPT:=./src/lizard.sh
-export DeOS_BUILD_BITCOIN:=$(TRUE)
-export DeOS_BUILD_BLOCKSTACK:=$(FALSE)
-export DeOS_BUILD_DOCKER:=$(FALSE)
-export DeOS_BUILD_NGINX:=$(TRUE)
-export DeOS_BUILD_PYTHON:=$(TRUE)
-export DeOS_CONFIG_DEBUG:=$(FALSE)
-export DeOS_CONFIG_FASTBOOT:=$(FALSE)
+#[config]
+export DeOS_CONFIG_DEBUG:=$(Δ(data['deos']['config']['debug']))
+export DeOS_CONFIG_FASTBOOT:=$(Δ(data['deos']['config']['fastboot']))
+
+#[boot]
+export DeOS_BOOT_ARGS_BITCOIN:=Δ(data['deos']['boot']['args']['bitcoin'])
+export DeOS_BOOT_ARGS_BLOCKSTACK:=Δ(data['deos']['boot']['args']['blockstack'])
+export DeOS_BOOT_ARGS_BOOTSTRAP:=Δ(data['deos']['boot']['args']['bootstrap'])
+export DeOS_BOOT_ARGS_DOCKER:=Δ(data['deos']['boot']['args']['docker'])
+export DeOS_BOOT_ARGS_NGINX:=Δ(data['deos']['boot']['args']['nginx'])
+export DeOS_BOOT_ARGS_PYTHON:=Δ(data['deos']['boot']['args']['python'])
+ifeq ($(DeOS_CONFIG_DEBUG),$(IS_TRUE))
+export DeOS_BOOT_DEBUG:=
+else
+export DeOS_BOOT_DEBUG:=2> /dev/null
+endif
+export DeOS_BOOT_PATH:=Δ(data['deos']['boot']['path'])
+export DeOS_BOOT_SCRIPT:=Δ(data['deos']['boot']['script'])
+
+#[build]
+ifeq ($(DeOS_CONFIG_FASTBOOT),$(IS_TRUE))
+export DeOS_BUILD_APT_UPGRADE:=$(FALSE)
+else
+export DeOS_BUILD_APT_UPGRADE:=$(TRUE)
+endif
+export DeOS_BUILD_BITCOIN:=$(Δ(data['deos']['build']['bitcoin']))
+export DeOS_BUILD_BLOCKSTACK:=$(Δ(data['deos']['build']['blockstack']))
+export DeOS_BUILD_DOCKER:=$(Δ(data['deos']['build']['docker']))
+export DeOS_BUILD_NGINX:=$(Δ(data['deos']['build']['nginx']))
+export DeOS_BUILD_PYTHON:=$(Δ(data['deos']['build']['python']))
+
+#[cmd]
+ifeq ($(DeOS_CONFIG_FASTBOOT),$(IS_TRUE))
+export DeOS_CMD_APT_UPGRADE:=echo 'FASTBOOT!'
+else
+export DeOS_CMD_APT_UPGRADE:=apt-get -y upgrade $(DeOS_BOOT_DEBUG)
+endif
+
+#[host]
 export DeOS_HOST_OS:=$(shell uname -s)
+
+#[run]
 export DeOS_RUN_SERVER:=$(FALSE)
+
+#[vm]
 export DeOS_VM_BOX:=bento/ubuntu-16.04
 export DeOS_VM_PATH:=/deos
 export DeOS_VM_PATH_ZT:=/var/lib/zerotier-one
 export DeOS_VM_USER:=vagrant
 export DeOS_VM_SHELL_DEFAULT:=bash -c 'BASH_ENV=/etc/profile exec bash'
 export DeOS_VM_SHELL_SSH:=bash -l
-
-ifeq ($(DeOS_CONFIG_DEBUG),$(IS_TRUE))
-export DeOS_BOOT_DEBUG:=
-else
-export DeOS_BOOT_DEBUG:=2> /dev/null
-endif
-
-ifeq ($(DeOS_CONFIG_FASTBOOT),$(IS_TRUE))
-export DeOS_BUILD_APT_UPGRADE:=$(FALSE)
-export DeOS_CMD_APT_UPGRADE:=echo 'FASTBOOT!'
-else
-export DeOS_BUILD_APT_UPGRADE:=$(TRUE)
-export DeOS_CMD_APT_UPGRADE:=apt-get -y upgrade $(DeOS_BOOT_DEBUG)
-endif
 
 ###
 
@@ -51,10 +67,10 @@ export BUILDNOTEBOOK:=$(FALSE)
 export DeOS_FILESYNC:=$(TRUE)
 
 export BOOT:=$(BASEDIR)/boot
-DELTA:=$(BASEDIR)/.deos/bin/darwin/delta
+DELTA:=$(BASEDIR)/bin/delta
 DEOS:=$(BASEDIR)/bin/deos
 LIB:=$(BASEDIR)/lib
-PRINT:=$(BASEDIR)/.deos/bin/darwin/printm
+PRINT:=$(BASEDIR)/bin/printm
 SRC:=$(BASEDIR)/src
 STATIC:=$(BASEDIR)/static
 VENV:=$(BASEDIR)/.deos/venv

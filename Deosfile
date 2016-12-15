@@ -1,0 +1,210 @@
+author=atd@bitcoin.sh
+root=true
+version=v0.7-alpha.2
+
+[.deosrc]
+type=make
+
+[{.editor,.flow}config]
+type=ini
+
+[.git{attributes,ignore}]
+static=true
+type=txt
+
+[.nvmrc]
+type=txt
+
+[.travis.yml]
+type=yaml
+
+[{LICENSE,README}.md]
+static=true
+type=markdown
+
+[Gulpfile.babel.js]
+type=es6
+
+[Makefile]
+type=make
+
+[Vagrantfile]
+type=ruby
+
+[main.py]
+static=true
+type=python
+
+[package.json]
+type=json
+
+[yarn.lock]
+static=true
+type=yaml
+
+---
+
+type: object
+required: [.deosrc, Makefile]
+properties:
+  .deosrc:
+    type: object
+    required: [deos]
+    properties:
+      deos:
+        type: object
+        required: [boot, build]
+        properties:
+          boot:
+            type: object
+            required: [args, path, script]
+            properties:
+              args:
+                type: object
+                required: [bitcoin, blockstack, bootstrap, docker, nginx,
+                          python]
+                properties:
+                  bitcoin: {type: string}
+                  blockstack: {type: string}
+                  bootstrap: {type: string}
+                  docker: {type: string}
+                  nginx: {type: string}
+                  python: {type: string}
+              path: {type: string}
+              script: {type: string}
+          build:
+            type: object
+            required: [bitcoin, blockstack, docker, nginx, python, upgrade]
+            properties:
+              bitcoin: {type: boolean}
+              blockstack: {type: boolean}
+              docker: {type: boolean}
+              nginx: {type: boolean}
+              python: {type: boolean}
+              upgrade: {type: boolean}
+  Makefile:
+      type: object
+      required: [makeflags, default_goal, phony, sublime_targets, config_file,
+                all]
+      properties:
+        makeflags: {type: string}
+        default_goal: {type: string}
+        phony: {type: string}
+        sublime_targets: {type: string}
+        config_file: {type: string}
+        all:
+          type: object
+          required: [hook, "if:host;is:mac", else]
+          hook:
+            type: object
+            required: [pre, post]
+
+---
+
+.deosrc:
+  deos:
+    boot:
+      args:
+        bitcoin: -b
+        blockstack: -d
+        bootstrap: -a test
+        docker: -f
+        nginx: -e
+        python: -c
+      path: /deos/src/boot
+      script: ./src/boot/index.sh
+    build:
+      upgrade: false
+      bitcoin: false
+      blockstack: false
+      docker: false
+      nginx: true
+      python: false
+    cmd:
+      apt:
+        upgrade:
+          if;true: echo 'FASTBOOT!'
+          else: apt-get -y upgrade $(DeOS_BOOT_DEBUG)
+      debug:
+        if;true: null
+        else: 2> /dev/null
+    config:
+      debug: false
+      fastboot: true
+    run:
+      server: false
+    vm:
+      box: bento/ubuntu-16.04
+      path: /deos
+      user: vagrant
+      shell:
+        default: bash -c 'BASH_ENV=/etc/profile exec bash'
+        ssh: bash -l
+
+Makefile:
+  makeflags: --no-print-directory
+  default_goal: all
+  phony: all bin build check chmod clean init rm sh venv vm
+  sublime_targets: all
+  config_file: .deosrc
+  all:
+    hook:
+      pre: >
+        @echo && $(PRINT) cyan $@ start
+      post: >
+        @$(PRINT) cyan $@ stop && echo
+    if:host;is:mac: >
+      @$(MAKE) templates
+    else: >
+      @(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
+
+###
+
+.editorconfig:
+  root: true
+  _*:
+    charset: utf-8
+    end:of:
+      line: lf
+    indent:
+      size: 4
+      style: space
+    insert:
+      final:
+        newline: true
+    trim:
+      trailing:
+        whitespace: true
+  _*.mk:
+    indent:
+      style: tab
+  _*.sh:
+    indent:
+      size: 2
+
+.flowconfig:
+  ignore:
+    - .*/node_modules/gulp-flowtype/.*
+
+.nvmrc:
+  node:
+    version:
+      major: 7
+      minor: 0
+      patch: 0
+
+.travis.yml:
+  dist: trusty
+  language: generic
+  os: linux
+  sudo: false
+  before_install:
+  - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
+  install:
+  - nvm install && nvm use && npm install --global yarn && yarn install
+  before_script:
+  - export PATH="$PATH:$HOME/.yarn/bin"
+  script:
+  - make build
+  after_script:
+  - echo $TRAVIS_COMMIT_RANGE
