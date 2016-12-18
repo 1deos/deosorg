@@ -112,9 +112,6 @@
 [submodule "ext/bitcoin/two1-sell-boilerplate"]
 	path = ext/bitcoin/two1-sell-boilerplate
 	url = https://github.com/21dotco/two1-sell-boilerplate.git
-[submodule "ext/web"]
-	path = ext/web
-	url = https://github.com/webpy/webpy.git
 [submodule "ext/bitcoin/bitcoin"]
 	path = ext/bitcoin/bitcoin
 	url = https://github.com/bitcoin/bitcoin.git
@@ -130,3 +127,9 @@
 [submodule "doc/bitcoin/QA"]
 	path = doc/bitcoin/QA
 	url = https://github.com/bitcoin/QA.git
+[submodule "ext/python/web"]
+	path = ext/python/web
+	url = https://github.com/webpy/webpy.git
+[submodule "ext/python/cpp"]
+	path = ext/python/cpp
+	url = https://github.com/evanplaice/pypreprocessor.git
