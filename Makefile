@@ -8,107 +8,108 @@ export MAKEFLAGS=--no-print-directory
 
 include .deosrc
 
-all: init clean check build
-	@$(PRINT) cyan $@ start
+all: chmod
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
-	@(echo $@)
-else
-	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
-endif
-	@$(PRINT) cyan $@ stop
-
-bitcoin:; (sh src/bitcoin.sh)
-
-init:
-ifeq ($(DeOS_HOST_OS),$(IS_MAC))
-	@-$(MAKE) bin
-	@-$(MAKE) chmod
-else
-	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
+	@(if [[ -z "$(x)" ]];    then ($(MAKE) install); fi)
+	@(if [[ -n "$(x)" ]];    then ($(PRINTM) cyan $@ start); fi)
+	if   [ "$(x)" = "all" ]; then ($(MAKE) build)\
+	else [ "$(x)" = "run" ]    && ($(MAKE) wallet) || ($(MAKE) x=all); fi
+	@(if [[ -n "$(x)" ]];    then ($(PRINTM) cyan $@ stop); fi)
 endif
 
-bin:
-	@$(PRINT) cyan $@ start
+install:
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
-	@echo $@
-else
-	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
+	sh $(BASEDIR)/src/install.sh
 endif
-	@$(PRINT) cyan $@ stop
 
 chmod:
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
-	@-chmod +x $(PRINT) $(DEOS)
-else
-	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
+	@-chmod +x $(PRINTM) $(DEOS)
 endif
 
-build: venv
-	@$(PRINT) cyan $@ start
+build: venv check
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
+	@$(PRINTM) cyan $@ start
 	-mkdir $(BASEDIR)/config/nginx/
 	-$(MAKE) vm
-else
-	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
+	@$(PRINTM) cyan $@ stop
 endif
-	@$(PRINT) cyan $@ stop
 
 clean:
-	@$(PRINT) magenta $@ start
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
+	@$(PRINTM) magenta $@ start
 	@-$(MAKE) rm
 	@-rm -rf $(BASEDIR)/.blockstack/
 	@-rm -rf $(BASEDIR)/.vagrant/
 	@-rm -rf $(BASEDIR)/.zerotier/
-else
-	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
+	@$(PRINTM) magenta $@ stop
 endif
-	@$(PRINT) magenta $@ stop
 
 check:
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
-	@$(PRINT) cyan $@ start
+	@$(PRINTM) cyan $@ start
 	@-$(MAKE) deos.check
-	@$(PRINT) cyan $@ stop
+	@$(PRINTM) cyan $@ stop
 else
 	@-$(MAKE) deos.check
 endif
 
 venv:
-	@$(PRINT) cyan $@ start
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
-	cd $(VENV)/darwin/ && virtualenv default --no-site-packages
-	cp $(SRC)/templates/git/gitignore.txt \
-	   $(VENV)/darwin/default/.gitignore
-else
-	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
+	@$(PRINTM) cyan $@ start
+	[ "$(x)" = "blockstack" ]\
+	&& (cd $(VENV)/darwin/\
+		&& virtualenv blockstack --no-site-packages)\
+	|| (cd $(VENV)/darwin/\
+		&& virtualenv default --no-site-packages)
+	@$(PRINTM) cyan $@ stop
 endif
-	@$(PRINT) cyan $@ stop
 
 rm:
-	@$(PRINT) yellow $@ start
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
-	[ -d $(BASEDIR)/.vagrant/ ] && rm -rf $(BASEDIR)/.deos/
+	@$(PRINTM) yellow $@ start
+	-rm -rf $(BASEDIR)/.deos/
+	#[ -d $(BASEDIR)/.vagrant/ ] && rm -rf $(BASEDIR)/.deos/
 	-$(MAKE) vm.uninstall
-else
-	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
+	@$(PRINTM) yellow $@ stop
 endif
-	@$(PRINT) yellow $@ stop
 
 sh:
-	@$(PRINT) cyan $@ start
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
+	@$(PRINTM) cyan $@ start
 	-$(MAKE) vm.ssh
-else
-	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
+	@$(PRINTM) cyan $@ stop
 endif
-	@$(PRINT) cyan $@ stop
 
 vm:
-	@$(PRINT) cyan $@ start
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
+	@$(PRINTM) cyan $@ start
 	-$(MAKE) vm.install
-else
-	@(echo "'make $@' isn't yet supported on $(DeOS_HOST_OS).")
+	@$(PRINTM) cyan $@ stop
 endif
-	@$(PRINT) cyan $@ stop
+
+yubikey:
+	@$(PRINTM) cyan $@ start
+	$(DeOS_YUBIKEY_PATH_SRC)/yubiserve.py --db $(DeOS_YUBIKEY_PATH_DB)
+	@$(PRINTM) cyan $@ stop
+
+wallet:
+	@-$(PRINTM) cyan $@ start
+	#brew install libusb-1.0-0
+	# clean
+	-rm -rf $(VENV)/darwin/wallet/
+	# init
+	cd $(VENV)/darwin/ && virtualenv wallet --no-site-packages
+	# install
+	source .deos/venv/darwin/wallet/bin/activate\
+	&& pip install pyusb --pre\
+	&& pip install pypreprocessor
+	# build
+	source .deos/venv/darwin/wallet/bin/activate\
+	&& cd src\
+	&& python wallet.py prod
+	# run
+	source .deos/venv/darwin/wallet/bin/activate\
+	&& chmod +x bin/wallet\
+	&& ./bin/wallet
+	@-$(PRINTM) cyan $@ stop

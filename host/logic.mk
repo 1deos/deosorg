@@ -22,9 +22,11 @@ logic.run.pre: logic.run.new
 	@$(PRINT) purple $@ stop
 	@$(PRINT) blue logic.run start
 
-logic.run:; ($(BIN)/logic)
+logic.run:
+	$(BIN)/logic
 
-logic.run.travis:; @(echo "hello, world!")
+logic.run.travis:
+	@(echo "hello, world!")
 
 logic.run.post:
 	@$(PRINT) blue logic.run stop
@@ -33,7 +35,8 @@ logic.run.post:
 	@$(PRINT) purple $@ stop
 	@$(MAKE) logic.run.free
 
-logic.run.free:; @(echo && $(PRINT) red logic stop)
+logic.run.free:
+	@(echo && $(PRINT) red logic stop)
 
 logic.clean:
 	@$(PRINT) cyan $@ start

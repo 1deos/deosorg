@@ -1,4 +1,4 @@
-MAINTAINER "atd@bitcoin.sh"
+MAINTAINER "atd@gmx.it"
 RUN "curl -sL $DVM_INSTALL | sh"
 source $DVM_ACTIVATE && dvm install
 echo "source $DVM_ACTIVATE" >> $VM_BASHRC

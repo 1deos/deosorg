@@ -1,4 +1,4 @@
-MAINTAINER "atd@bitcoin.sh"
+MAINTAINER "atd@gmx.it"
 SUDO_INSTALL "nginx"
 RM "/etc/nginx/nginx.conf"
 NEW "/deos/.deos/etc/linux/nginx/nginx.conf"\

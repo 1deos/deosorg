@@ -9,7 +9,7 @@ spinner() {
   done
 }
 
-start() {
+main() {
   printf "\033[30;1m$1\033[0m\n"
   spinner &
   spinner_pid=$!
@@ -22,4 +22,4 @@ start() {
   printf '\n'
 }
 
-start "$1"
+main "$1"

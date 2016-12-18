@@ -66,8 +66,8 @@ utilitybelt==0.2.6
 virtualchain==0.14.0
 EOF
 
-cp src/delta.sh .deos/bin/darwin/delta
-chmod +x .deos/bin/darwin/delta
+cp src/spinner.sh .deos/bin/darwin/spinner
+chmod +x .deos/bin/darwin/spinner
 
 cp src/deos.py .deos/bin/darwin/deos
 chmod +x .deos/bin/darwin/deos
@@ -78,5 +78,11 @@ chmod +x .deos/bin/darwin/printm
 rm -rf static/build/
 mkdir static/build
 
+make x=blockstack venv
+
+bash -c "\
+source .deos/venv/darwin/blockstack/bin/activate\
+&& pip install blockstack"
+
 .deos/bin/darwin/deos
-make all
+#make yubikey

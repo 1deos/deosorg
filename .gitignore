@@ -1,8 +1,10 @@
 #[dotfiles]
 .DS_Store
+.secret
 
 #[dotfolders]
 .blockstack/
+.cache/
 .deos/
 .ext/
 .nvm/

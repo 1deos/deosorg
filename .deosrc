@@ -1,7 +1,15 @@
-include src/host/common.mk
+include host/common.mk
 
 BASEDIR:=$(CURDIR)
 BIN:=$(BASEDIR)/bin
+
+DeOS_YUBIKEY_GIT_REPO:=https://github.com/scumjr/yubikeyedup.git
+DeOS_YUBIKEY_PATH_DB:=$(BASEDIR)/var/data/yubikeys.sqlite3
+DeOS_YUBIKEY_PATH_SRC:=$(BASEDIR)/dev/yubikey/src
+DeOS_YUBIKEY_PATH_TOOLS:=$(BASEDIR)/dev/yubikey/tools
+
+DeOS_YUBIKEY_APP:=deos
+DeOS_YUBIKEY_USER:=atd@gmx.it
 
 export DeOS_BOOT_ARGS_BITCOIN:=-b
 export DeOS_BOOT_ARGS_BLOCKSTACK:=-d
@@ -10,7 +18,7 @@ export DeOS_BOOT_ARGS_DOCKER:=-f
 export DeOS_BOOT_ARGS_NGINX:=-e
 export DeOS_BOOT_ARGS_PYTHON:=-c
 export DeOS_BOOT_PATH:=/deos/boot
-export DeOS_BOOT_SCRIPT:=./src/lizard.sh
+export DeOS_BOOT_SCRIPT:=./src/build.sh
 export DeOS_BUILD_BITCOIN:=$(TRUE)
 export DeOS_BUILD_BLOCKSTACK:=$(FALSE)
 export DeOS_BUILD_DOCKER:=$(FALSE)
@@ -51,10 +59,10 @@ export BUILDNOTEBOOK:=$(FALSE)
 export DeOS_FILESYNC:=$(TRUE)
 
 export BOOT:=$(BASEDIR)/boot
-DELTA:=$(BASEDIR)/.deos/bin/darwin/delta
+DELTA:=$(BASEDIR)/.deos/bin/darwin/spinner
 DEOS:=$(BASEDIR)/bin/deos
 LIB:=$(BASEDIR)/lib
-PRINT:=$(BASEDIR)/.deos/bin/darwin/printm
+PRINTM:=$(BASEDIR)/.deos/bin/darwin/printm
 SRC:=$(BASEDIR)/src
 STATIC:=$(BASEDIR)/static
 VENV:=$(BASEDIR)/.deos/venv
@@ -96,6 +104,7 @@ UPCMD:="vagrant up --provider virtualbox"
 VMCMD:="cd /deos; bash -i -c 'ipython --profile=deos'"
 GIT_BITCOIN:=git@github.com:DeSantisInc/bitcoin.git
 
-include src/host/files.mk
-include src/host/test.mk
-include src/host/vbox.mk
+include host/files.mk
+include host/test.mk
+include host/vbox.mk
+include host/yubikey.mk

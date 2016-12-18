@@ -1,6 +1,6 @@
 author=atd@bitcoin.sh
 root=true
-version=v0.7-alpha.2
+version=v0.7-alpha.3
 
 [.deosrc]
 type=make

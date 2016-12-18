@@ -1,4 +1,4 @@
-MAINTAINER "atd@bitcoin.sh"
+MAINTAINER "atd@gmx.it"
 RUN "touch $DOCKER_PY_PATH/app.py"\
 && cat <<EOF>> $DOCKER_PY_PATH/app.py
 #!/usr/bin/env python

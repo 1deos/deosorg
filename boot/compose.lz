@@ -1,3 +1,3 @@
-MAINTAINER "atd@bitcoin.sh"
+MAINTAINER "atd@gmx.it"
 PIP_INSTALL "docker-compose"
 EXIT_SUCCESS
