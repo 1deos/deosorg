@@ -75,8 +75,8 @@ chmod +x .deos/bin/darwin/deos
 cp src/print.py .deos/bin/darwin/printm
 chmod +x .deos/bin/darwin/printm
 
-rm -rf static/build/
-mkdir static/build
+rm -rf var/build/
+mkdir var/build
 
 make x=blockstack venv
 

@@ -1,0 +1,132 @@
+[submodule "app/terminal"]
+	path = app/terminal
+	url = https://github.com/zeit/hyper.git
+[submodule "dev/yubikey"]
+	path = dev/yubikey
+	url = https://github.com/scumjr/yubikeyedup.git
+[submodule "ext/blockstack/blockstack-cli"]
+	path = ext/blockstack/blockstack-cli
+	url = https://github.com/blockstack/blockstack-cli.git
+[submodule "ext/blockstack/dns-zone-file-py"]
+	path = ext/blockstack/dns-zone-file-py
+	url = https://github.com/blockstack/dns-zone-file-py.git
+[submodule "ext/blockstack/blockstack-profiles-py"]
+	path = ext/blockstack/blockstack-profiles-py
+	url = https://github.com/blockstack/blockstack-profiles-py.git
+[submodule "ext/blockstack/virtualchain"]
+	path = ext/blockstack/virtualchain
+	url = https://github.com/blockstack/virtualchain.git
+[submodule "ext/blockstack/blockstack-core"]
+	path = ext/blockstack/blockstack-core
+	url = https://github.com/blockstack/blockstack-core.git
+[submodule "ext/blockstack/blockstack-files"]
+	path = ext/blockstack/blockstack-files
+	url = https://github.com/blockstack/blockstack-files.git
+[submodule "ext/blockstack/blockstack-gpg"]
+	path = ext/blockstack/blockstack-gpg
+	url = https://github.com/blockstack/blockstack-gpg.git
+[submodule "ext/blockstack/pybitcoin"]
+	path = ext/blockstack/pybitcoin
+	url = https://github.com/blockstack/pybitcoin.git
+[submodule "ext/blockstack/keychain-manager-py"]
+	path = ext/blockstack/keychain-manager-py
+	url = https://github.com/blockstack/keychain-manager-py
+[submodule "ext/blockstack/keylib-py"]
+	path = ext/blockstack/keylib-py
+	url = https://github.com/blockstack/keylib-py
+[submodule "ext/bitcoin/python-bitcoinlib"]
+	path = ext/bitcoin/python-bitcoinlib
+	url = https://github.com/petertodd/python-bitcoinlib.git
+[submodule "app/gitiles"]
+	path = app/gitiles
+	url = https://github.com/google/gitiles.git
+[submodule "ext/bitcoin/picocoin"]
+	path = ext/bitcoin/picocoin
+	url = https://github.com/jgarzik/picocoin.git
+[submodule "doc/electrum"]
+	path = doc/electrum
+	url = https://github.com/spesmilo/electrum-docs.git
+[submodule "test/blockstack"]
+	path = test/blockstack
+	url = https://github.com/blockstack/blockstack-integration-tests.git
+[submodule "ext/zerotier/ZeroTierOne"]
+	path = ext/zerotier/ZeroTierOne
+	url = https://github.com/zerotier/ZeroTierOne.git
+[submodule "ext/zerotier/ZeroTierSDK"]
+	path = ext/zerotier/ZeroTierSDK
+	url = https://github.com/zerotier/ZeroTierSDK.git
+[submodule "ext/bittorrent/webtorrent"]
+	path = ext/bittorrent/webtorrent
+	url = https://github.com/feross/webtorrent.git
+[submodule "ext/bittorrent/bittorrent-dht"]
+	path = ext/bittorrent/bittorrent-dht
+	url = https://github.com/feross/bittorrent-dht.git
+[submodule "ext/bittorrent/bittorrent-peerid"]
+	path = ext/bittorrent/bittorrent-peerid
+	url = https://github.com/fisch0920/bittorrent-peerid.git
+[submodule "ext/bittorrent/bittorrent-protocol"]
+	path = ext/bittorrent/bittorrent-protocol
+	url = https://github.com/feross/bittorrent-protocol.git
+[submodule "ext/bittorrent/bittorrent-tracker"]
+	path = ext/bittorrent/bittorrent-tracker
+	url = https://github.com/feross/bittorrent-tracker.git
+[submodule "ext/bittorrent/create-torrent"]
+	path = ext/bittorrent/create-torrent
+	url = https://github.com/feross/create-torrent.git
+[submodule "ext/bittorrent/magnet-uri"]
+	path = ext/bittorrent/magnet-uri
+	url = https://github.com/feross/magnet-uri.git
+[submodule "ext/bittorrent/parse-torrent"]
+	path = ext/bittorrent/parse-torrent
+	url = https://github.com/feross/parse-torrent.git
+[submodule "ext/bittorrent/render-media"]
+	path = ext/bittorrent/render-media
+	url = https://github.com/feross/render-media.git
+[submodule "ext/bittorrent/torrent-discovery"]
+	path = ext/bittorrent/torrent-discovery
+	url = https://github.com/feross/torrent-discovery.git
+[submodule "ext/bittorrent/ut_metadata"]
+	path = ext/bittorrent/ut_metadata
+	url = https://github.com/feross/ut_metadata.git
+[submodule "ext/bittorrent/ut_pex"]
+	path = ext/bittorrent/ut_pex
+	url = https://github.com/fisch0920/ut_pex.git
+[submodule "ext/bittorrent/GitTorrent"]
+	path = ext/bittorrent/GitTorrent
+	url = https://github.com/cjb/GitTorrent.git
+[submodule "ext/bittorrent/ut_gittorrent"]
+	path = ext/bittorrent/ut_gittorrent
+	url = https://github.com/cjb/ut_gittorrent.git
+[submodule "ext/bitcoin/electrum"]
+	path = ext/bitcoin/electrum
+	url = https://github.com/spesmilo/electrum.git
+[submodule "ext/bitcoin/electrum-server"]
+	path = ext/bitcoin/electrum-server
+	url = https://github.com/spesmilo/electrum-server.git
+[submodule "ext/bitcoin/two1-python"]
+	path = ext/bitcoin/two1-python
+	url = https://github.com/21dotco/two1-python.git
+[submodule "ext/bitcoin/two1-docker"]
+	path = ext/bitcoin/two1-docker
+	url = https://github.com/21dotco/two1-docker.git
+[submodule "ext/bitcoin/two1-sell-boilerplate"]
+	path = ext/bitcoin/two1-sell-boilerplate
+	url = https://github.com/21dotco/two1-sell-boilerplate.git
+[submodule "ext/web"]
+	path = ext/web
+	url = https://github.com/webpy/webpy.git
+[submodule "ext/bitcoin/bitcoin"]
+	path = ext/bitcoin/bitcoin
+	url = https://github.com/bitcoin/bitcoin.git
+[submodule "ext/bitcoin/libblkmaker"]
+	path = ext/bitcoin/libblkmaker
+	url = https://github.com/bitcoin/libblkmaker.git
+[submodule "ext/bitcoin/libbase58"]
+	path = ext/bitcoin/libbase58
+	url = https://github.com/bitcoin/libbase58.git
+[submodule "doc/bitcoin/bips"]
+	path = doc/bitcoin/bips
+	url = https://github.com/bitcoin/bips.git
+[submodule "doc/bitcoin/QA"]
+	path = doc/bitcoin/QA
+	url = https://github.com/bitcoin/QA.git

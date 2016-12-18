@@ -7,11 +7,10 @@ yubikey.build: yubikey.clone
 
 yubikey.clone: yubikey.clean
 	-git rm --cached dev/yubikey
-	-git submodule add --force $(DeOS_YUBIKEY_GIT_REPO) dev/yubikey
+	-git submodule add $(DeOS_YUBIKEY_GIT_REPO) dev/yubikey
 
 yubikey.clean:
-	-rm .gitmodules #FIXME
-	-rm -rf dev/yubikey
+	#-rm -rf dev/yubikey
 
 yubikey.install:
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))

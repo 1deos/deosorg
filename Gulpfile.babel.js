@@ -17,9 +17,9 @@ import { paths, toClean, toLint } from './src/descript/config.paths';
 gulp.task('clean', () => del(toClean));
 
 gulp.task('lint', ['clean'], () => gulp.src(toLint)
-                            .pipe(eslint())
-                            .pipe(eslint.format())
-                            .pipe(flow({ abort: false })));
+                                       .pipe(eslint())
+                                       .pipe(eslint.format())
+                                       .pipe(flow({ abort: false })));
 
 gulp.task('build', ['lint'], () => {
   gulp.src(paths.files.client.js.all)

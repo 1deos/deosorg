@@ -1,6 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-require './src/plugins/reboot'
+require './plugin/vagrant/reboot'
 Vagrant.configure('2') do |config|
   config.vm.define :DeVM do |t| end
   config.vm.box = ENV['DeOS_VM_BOX']
@@ -24,11 +24,11 @@ Vagrant.configure('2') do |config|
     config.vm.synced_folder '.', '/vagrant',
       disabled: true
     config.vm.synced_folder '.', ENV['DeOS_VM_PATH']
-    config.vm.synced_folder '.zerotier', ENV['DeOS_VM_PATH_ZT'],
+    config.vm.synced_folder 'etc/zerotier', ENV['DeOS_VM_PATH_ZT'],
       owner: 'root',
       group: 'root',
     create: true
-    config.vm.synced_folder '.blockstack', '/home/vagrant/.blockstack',
+    config.vm.synced_folder 'etc/blockstack', '/home/vagrant/.blockstack',
       owner: 'vagrant',
       group: 'vagrant',
     create: true
@@ -56,6 +56,8 @@ Vagrant.configure('2') do |config|
   if ENV['BUILDZT'] != '0'
     config.vm.provision :shell,
       env: {
+        'DeOS_BOOT_PATH' => ENV['DeOS_BOOT_PATH'],
+        'DeOS_BOOT_DEBUG' => ENV['DeOS_BOOT_DEBUG'],
         'DeOS_CMD_APT_UPGRADE' => ENV['DeOS_CMD_APT_UPGRADE'],
         'ZT_GPG_KEY' => ENV['ZT_GPG_KEY'],
         'ZT_INSTALL' => ENV['ZT_INSTALL'],

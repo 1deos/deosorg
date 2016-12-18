@@ -58,9 +58,9 @@ def main():
     data = load()
     if isinstance(data, dict):
         code = build('make/deosrc.mk', data['.deosrc'])
-        write('static/build/.deosrc', code)
+        write('var/build/.deosrc', code)
         code = build('make/makefile.mk', data['Makefile'])
-        write('static/build/Makefile', code)
+        write('var/build/Makefile', code)
 
 if __name__ == "__main__":
     main()

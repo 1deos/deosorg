@@ -10,11 +10,11 @@ include .deosrc
 
 all: chmod
 ifeq ($(DeOS_HOST_OS),$(IS_MAC))
-	@(if [[ -z "$(x)" ]];    then ($(MAKE) install); fi)
-	@(if [[ -n "$(x)" ]];    then ($(PRINTM) cyan $@ start); fi)
-	if   [ "$(x)" = "all" ]; then ($(MAKE) build)\
-	else [ "$(x)" = "run" ]    && ($(MAKE) wallet) || ($(MAKE) x=all); fi
-	@(if [[ -n "$(x)" ]];    then ($(PRINTM) cyan $@ stop); fi)
+	@(if [[ -z "$(x)" ]]; then ($(MAKE) install); fi)
+	@(if [[ -n "$(x)" ]]; then ($(PRINTM) cyan $@ start); fi)
+	if [ "$(x)" = "all" ]; then ($(MAKE) build)\
+	else [ "$(x)" = "run" ] && ($(MAKE) wallet) || ($(MAKE) x=all); fi
+	@(if [[ -n "$(x)" ]]; then ($(PRINTM) cyan $@ stop); fi)
 endif
 
 install:

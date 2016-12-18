@@ -15,11 +15,11 @@ vm.uninstall: vm.down
 	-rm $(BASEDIR)/app/index.min.html
 	-rm -rf $(BASEDIR)/app/node_modules/
 	-rm -rf $(BASEDIR)/node_modules/
-	-rm -rf $(BASEDIR)/static/docker/nginx/ \
-		&& mkdir $(BASEDIR)/static/docker/nginx/ \
-		&& cp $(BASEDIR)/static/templates/gitignore.txt \
-		      $(BASEDIR)/static/docker/nginx/.gitignore
-	-rm -rf $(BASEDIR)/static/docker/python/ \
-		&& mkdir $(BASEDIR)/static/docker/python/ \
-		&& cp $(BASEDIR)/static/templates/gitignore.txt \
-		      $(BASEDIR)/static/docker/python/.gitignore
+	-rm -rf $(BASEDIR)/var/docker/nginx/ \
+		&& mkdir $(BASEDIR)/var/docker/nginx/ \
+		&& cp $(BASEDIR)/var/templates/gitignore.txt \
+		      $(BASEDIR)/var/docker/nginx/.gitignore
+	-rm -rf $(BASEDIR)/var/docker/python/ \
+		&& mkdir $(BASEDIR)/var/docker/python/ \
+		&& cp $(BASEDIR)/var/templates/gitignore.txt \
+		      $(BASEDIR)/var/docker/python/.gitignore
