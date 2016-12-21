@@ -13,8 +13,8 @@ EXIT_FAILURE() {
 deos_bin() {
   for path in .deos/bin/darwin .deos/bin/vagrant .deos/bin/travis
   do
-    [ ! -f "$path/deos" ] && cp src/deos.py $path/deos
-    [ -f "$path/deos" ] && chmod +x $path/deos
+    [ ! -f "$path/tao" ] && cp src/tao.py $path/tao
+    [ -f "$path/tao" ] && chmod +x $path/tao
     [ ! -f "$path/logger" ] && cp src/logger.py $path/logger
     [ -f "$path/logger" ] && chmod +x $path/logger
     [ ! -f "$path/print" ] && cp src/print.py $path/print
@@ -62,7 +62,7 @@ deos_darwin() {
   deos_init
   #deos_venv "darwin"
   deos_bin
-  .deos/bin/darwin/deos
+  .deos/bin/darwin/tao
   EXIT_SUCCESS
 }
 
