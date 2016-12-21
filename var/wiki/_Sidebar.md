@@ -1,4 +1,4 @@
-[[[https://github.com/DeSantisInc/DeOS/raw/master/var/assets/icons/512x512.png|alt="21 Logo"|height=210px|width=210px]]](https://www.desantisinc.com)
+[[[https://github.com/DeSantisInc/DeOS/raw/master/var/asset/icons/512x512.png|alt="21 Logo"|height=210px|width=210px]]](https://www.desantisinc.com)
 
 # Knowledge Base
 ### __[[Home]]__

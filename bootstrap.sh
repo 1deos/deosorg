@@ -53,6 +53,7 @@ deos_clean() {
   [ -f ".editorconfig" ] && rm .editorconfig
   [ -f ".gitignore" ] && rm .gitignore
   [ -f ".nvmrc" ] && rm .nvmrc
+  [ -f "bootstrap.test.sh" ] && rm bootstrap.test.sh
   [ -f "Makefile" ] && rm Makefile
 }
 

@@ -70,7 +70,7 @@ two:
 
 ## Template
 
-```makefile
+```sh
 Δ with (data=None)
 
 export MAKEFLAGS=Δ(data['makeflags'])
@@ -114,6 +114,21 @@ webpy.clone:
     mv src/web/LICENSE.txt doc/web/LICENSE.txt
     mv src/web/ChangeLog.txt doc/web/ChangeLog.txt
 
+bips: bips.clone
+
+bips.clone:
+    -rm -rf doc/bips
+     cd doc/ && git clone git@github.com:bitcoin/bips.git
+     rm -rf doc/bips/.git/
+
+terminal: terminal.clone
+
+terminal.clone:
+    -rm -rf app/terminal
+    cd app/ && git clone git@github.com:zeit/hyper.git terminal
+    rm -rf app/terminal/.git/
+    rm -rf app/terminal/.github/
+
 two: #clean install build venv lint
 #    Δ(data['two']['hook']['pre'])
 #ifeq ($(DeOS_HOST_OS),$(IS_MAC))
@@ -128,6 +143,8 @@ meta:
     python src/hello.py
     $(MAKE) wiki
     $(MAKE) webpy
+    $(MAKE) terminal
+    $(MAKE) bips
 
 clean:
     @([ -d ".deos" ] && $(DeOS_RM_DOTDEOS) || echo "$@:else")
@@ -145,3 +162,30 @@ venv:
 lint:
     @(travis lint .travis.yml)
 ```
+
+## Test: Environment
+
+```yaml
+a: 1
+b: 2
+c: 3
+```
+
+## Test: Pass
+
+```sh
+#!/bin/sh
+echo "1"
+echo "2"
+echo "3"
+```
+
+## Test: Fail
+
+```sh
+#!/bin/sh
+echo "3"
+echo "2"
+echo "1"
+```
+

@@ -8,12 +8,12 @@ indent_style=space
 insert_final_newline=true
 trim_trailing_whitespace=true
 
+[*.mk]
+indent_style=tab
+
 [*.md]
 indent_style=space
 indent_size=2
-
-[*.mk]
-indent_style=tab
 
 [*.{lz,sh}]
 indent_style=space
@@ -36,4 +36,3 @@ indent_style=tab
 [Vagrantfile]
 indent_style=space
 indent_size=2
-

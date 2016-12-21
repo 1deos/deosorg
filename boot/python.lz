@@ -1,4 +1,3 @@
-#!/bin/sh
 MAINTAINER "atd@gmx.it"
 INSTALL "python2.7"
 INSTALL "python-dev"
@@ -9,4 +8,3 @@ PIP_UPGRADE "requests[security]"
 PIP_INSTALL "virtualenv"
 RUN "cd /deos/venv/linux/ && virtualenv default --no-site-packages"
 EXIT_SUCCESS
-
