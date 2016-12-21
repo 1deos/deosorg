@@ -1,1 +1,0 @@
-# DeOS: Decentralized Operating System

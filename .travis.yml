@@ -7,16 +7,16 @@ os: linux
 sudo: false
 
 before_install:
-  - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
+- echo 'before_install'
 
 install:
-  - nvm install && nvm use && npm install --global yarn && yarn install
+- echo 'install'
 
 before_script:
-  - export PATH="$PATH:$HOME/.yarn/bin"
+- echo 'before_script'
 
 script:
-  - make check
+- echo 'script'
 
 after_script:
-  - echo $TRAVIS_COMMIT_RANGE
+- echo 'after_script'

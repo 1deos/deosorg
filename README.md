@@ -6,42 +6,18 @@
 
 ## Getting Started
 
-### Install:
+### Install
 
-#### 1. Clone the Repo:
+#### *1. Clone the Repo*
 
 ```sh
-Δ git clone git@github.com:DeSantisInc/DeOS.git
+Δ git clone git@github.com:DeSantisInc/DeOS.git && cd DeOS
 ```
 
-#### 2. Install Vagrant:
+#### *2. Bootstrap the Environment*
 
 ```sh
-Δ brew cask install vagrant
-```
-
-#### 3. Install Virtualbox:
-
-```sh
-Δ brew cask install virtualbox
-```
-
-#### 4. Install the Virtual Machine:
-
-```sh
-Δ make vm
-```
-
-#### 5. Connect to the Virtual Machine:
-
-```sh
-Δ make sh
-```
-
-#### 6. Shutdown the Virtual Machine:
-
-```sh
-Δ make rm
+Δ sh bootstrap.sh
 ```
 
 ### Known Issues
@@ -62,6 +38,6 @@ URL: ["https://atlas.hashicorp.com/ubuntu/trusty64"]
 Error:
 ```
 
-Try the solution here: http://stackoverflow.com/a/40521433
+Try the solution here: https://stackoverflow.com/a/40521433
 
 ---

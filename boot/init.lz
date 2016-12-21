@@ -1,3 +1,4 @@
+#!/bin/sh
 MAINTAINER "atd@gmx.it"
 UPDATE && UPGRADE
 INSTALL "build-essential"
@@ -10,3 +11,4 @@ INSTALL "curl"
 INSTALL "apt-transport-https"
 INSTALL "ca-certificates"
 EXIT_SUCCESS
+

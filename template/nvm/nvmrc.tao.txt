@@ -1,3 +1,0 @@
-Δ with (data=None)
-
-vΔ(data['version']['major'])

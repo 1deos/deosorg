@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 RUN() {
+  #python /deos/src/logger.py "DEBUG" "$1"
   printf "\x1b[34;01mΔ => [ $1 ]\x1b[34;01m\n"
   echo "$1" | bash
 }
@@ -50,19 +51,19 @@ CLONE() {
 }
 
 VENV_RUN() {
-  RUN "source /deos/.deos/venv/linux/$1/bin/activate && $2"
+  RUN "source /deos/venv/linux/$1/bin/activate && $2"
 }
 
 VENV_BUILD() {
-  RUN "source /deos/.deos/venv/linux/$1/bin/activate && cd /deos/.deos/ext/linux/$2/ && python ./setup.py build"
+  RUN "source /deos/venv/linux/$1/bin/activate && cd /deos/.deos/ext/linux/$2/ && python ./setup.py build"
 }
 
 VENV_CREATE() {
-  RUN "cd /deos/.deos/venv/linux/ && virtualenv $1 --no-site-packages"
+  RUN "cd /deos/venv/linux/ && virtualenv $1 --no-site-packages"
 }
 
 VENV_INSTALL() {
-  RUN "source /deos/.deos/venv/linux/$1/bin/activate && cd /deos/.deos/ext/linux/$2/ && python ./setup.py install"
+  RUN "source /deos/venv/linux/$1/bin/activate && cd /deos/.deos/ext/linux/$2/ && python ./setup.py install"
 }
 
 SUDO_SYSD_ENABLE() {
