@@ -1,5 +1,5 @@
 author=atd@gmx.it
-version=v0.8-alpha.1
+version=v0.8-alpha.3
 
 [.nvmrc]
 meta=meta/Δ:.nvmrc.md
@@ -17,6 +17,10 @@ type=lz
 meta=meta/Δ:src:example.md
 type=sh
 
+[var/build/bootstrap.sh]
+meta=meta/Δ:bootstrap.md
+type=sh
+
 [.editorconfig]
 meta=meta/Δ:.editorconfig.md
 type=ini
@@ -25,9 +29,9 @@ type=ini
 meta=meta/Δ:.gitignore.md
 type=gitignore
 
-[bootstrap.test.sh]
-meta=meta/Δ:bootstrap.md
-type=sh
+[.travis.yml]
+meta=meta/Δ:.travis.md
+type=yaml
 
 [Makefile]
 meta=meta/Δ:Makefile.md

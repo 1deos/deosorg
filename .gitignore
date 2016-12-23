@@ -3,6 +3,7 @@
 *.pyc
 
 #[dotfolders]
+.cache/
 .deos/
 
 #[folders]
@@ -18,11 +19,8 @@ var/log/deos/*
 .nvmrc
 
 #[files]
-bootstrap.test.sh
-Makefile
 npm-debug.log
 src/example.sh
-Vagrantfile
 yarn-error.log
 
 #[except]

@@ -10,12 +10,22 @@ import web
 import simplejson as json
 import ruamel.yaml as yaml
 
-def build(template,data):
-    code=web.template.Template(template.replace('$','$$'
-                                      ).replace('Δ with', '$def with'
-                                      ).replace('Δ','$'
-                                      ).replace('#!/bin/sh','##!/bin/sh'
-                                      ).replace('# -*-','## -*-'))
+def build(template,data,ftype):
+    code=None
+    if 'sh'==ftype:
+        code=web.template.Template(template.replace('$','$$'
+                                          ).replace('Δ with', '$def with'
+                                          ).replace('Δ','$'
+                                          ).replace('#!/bin/sh','##!/bin/sh'))
+    elif 'ruby'==ftype:
+        code=web.template.Template(template.replace('$','$$'
+                                          ).replace('Δ with', '$def with'
+                                          ).replace('Δ','$'
+                                          ).replace('# -*-','## -*-'))
+    else:
+        code=web.template.Template(template.replace('$','$$'
+                                          ).replace('Δ with', '$def with'
+                                          ).replace('Δ','$'))
     return str(code(data)).replace(4*' ','\t'
                          ).replace('$(False)','$(FALSE)'
                          ).replace('$(True)','$(TRUE)'
@@ -94,7 +104,7 @@ def main():
             if value['type']=='make' or value['type']=='sh'\
                 or value['type']=='gitignore' or value['type']=='ini'\
                 or value['type']=='nvmrc' or value['type']=='ruby'\
-                or value['type']=='lz':
+                or value['type']=='lz' or value['type']=='yaml':
                 with open(value['meta']) as f:
                     raw=f.read()
             if isinstance(raw,basestring):
@@ -113,7 +123,7 @@ def main():
                                 print(json.dumps(env,sort_keys=True,indent=2))
                             template=get_template(data,raw,debug=debug)
                             if isinstance(template,basestring):
-                                code = build(template,env)
+                                code = build(template,env,value['type'])
                                 with open(name,'w') as f:
                                     f.write(code)
 

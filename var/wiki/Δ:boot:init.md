@@ -1,4 +1,4 @@
-# `.gitignore`
+# `boot/init.lz`
 
 ## Schema
 
@@ -21,39 +21,21 @@ c: 3
 
 ## Template
 
-```ini
+```sh
 Δ with (data=None)
 
-#[wildcards]
-*.o
-*.pyc
-
-#[dotfolders]
-.cache/
-.deos/
-
-#[folders]
-etc/blockstack/*
-etc/zerotier/*
-node_modules/
-var/backup/*
-var/build/
-var/log/deos/*
-
-#[dotfiles]
-.DS_Store
-.nvmrc
-
-#[files]
-npm-debug.log
-src/example.sh
-yarn-error.log
-
-#[except]
-!etc/blockstack/.gitprivate
-!etc/zerotier/.gitprivate
-!var/backup/.gitprivate
-!var/log/deos/.gitprivate
+MAINTAINER "atd@gmx.it"
+UPDATE && UPGRADE
+INSTALL "build-essential"
+INSTALL "clang"
+INSTALL "llvm"
+INSTALL "libffi-dev"
+INSTALL "libssl-dev"
+INSTALL "git"
+INSTALL "curl"
+INSTALL "apt-transport-https"
+INSTALL "ca-certificates"
+EXIT_SUCCESS
 ```
 
 ## Test: Environment

@@ -1,4 +1,4 @@
-# `.gitignore`
+# `boot/python.lz`
 
 ## Schema
 
@@ -21,39 +21,19 @@ c: 3
 
 ## Template
 
-```ini
+```sh
 Δ with (data=None)
 
-#[wildcards]
-*.o
-*.pyc
-
-#[dotfolders]
-.cache/
-.deos/
-
-#[folders]
-etc/blockstack/*
-etc/zerotier/*
-node_modules/
-var/backup/*
-var/build/
-var/log/deos/*
-
-#[dotfiles]
-.DS_Store
-.nvmrc
-
-#[files]
-npm-debug.log
-src/example.sh
-yarn-error.log
-
-#[except]
-!etc/blockstack/.gitprivate
-!etc/zerotier/.gitprivate
-!var/backup/.gitprivate
-!var/log/deos/.gitprivate
+MAINTAINER "atd@gmx.it"
+INSTALL "python2.7"
+INSTALL "python-dev"
+INSTALL "python-pip" && UPGRADE_PIP
+PIP_INSTALL "ndg-httpsclient"
+PIP_INSTALL "pyasn1"
+PIP_UPGRADE "requests[security]"
+PIP_INSTALL "virtualenv"
+RUN "cd /deos/venv/linux/ && virtualenv default --no-site-packages"
+EXIT_SUCCESS
 ```
 
 ## Test: Environment

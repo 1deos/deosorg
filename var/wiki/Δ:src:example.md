@@ -1,4 +1,4 @@
-# `.gitignore`
+# `src/example.sh`
 
 ## Schema
 
@@ -21,39 +21,12 @@ c: 3
 
 ## Template
 
-```ini
+```sh
 Δ with (data=None)
-
-#[wildcards]
-*.o
-*.pyc
-
-#[dotfolders]
-.cache/
-.deos/
-
-#[folders]
-etc/blockstack/*
-etc/zerotier/*
-node_modules/
-var/backup/*
-var/build/
-var/log/deos/*
-
-#[dotfiles]
-.DS_Store
-.nvmrc
-
-#[files]
-npm-debug.log
-src/example.sh
-yarn-error.log
-
-#[except]
-!etc/blockstack/.gitprivate
-!etc/zerotier/.gitprivate
-!var/backup/.gitprivate
-!var/log/deos/.gitprivate
+#!/bin/sh
+echo "Δ(data['a'])"
+echo "Δ(data['b'])"
+echo "Δ(data['c'])"
 ```
 
 ## Test: Environment
@@ -81,4 +54,3 @@ echo "3"
 echo "2"
 echo "1"
 ```
-

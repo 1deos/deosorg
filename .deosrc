@@ -1,0 +1,19 @@
+FALSE:=0
+TRUE:=1
+
+IS_FALSE:=$(FALSE)
+IS_TRUE:=$(TRUE)
+
+IS_MAC:=Darwin
+IS_LINUX:=Linux
+
+BASEDIR:=$(CURDIR)
+HOSTOS:=$(shell uname -s)
+SETCACHE:=$(TRUE)
+USECACHE:=$(FALSE)
+
+ifeq ($(HOSTOS),$(IS_MAC))
+PRINTM:=$(BASEDIR)/.deos/bin/darwin/print
+else
+PRINTM:=$(BASEDIR)/.deos/bin/travis/print
+endif
