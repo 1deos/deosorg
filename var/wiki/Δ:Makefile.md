@@ -43,25 +43,7 @@ properties:
 
   bips:
     type: object
-    required: [hook, 'else:host']
-    properties:
-      else:host: {type: string}
-      hook:
-        type: object
-        required: [logger, printm]
-        properties:
-          logger:
-            type: object
-            required: [pre, post]
-            properties:
-              pre: {type: string}
-              post: {type: string}
-          printm:
-            type: object
-            required: [pre, post]
-            properties:
-              pre: {type: string}
-              post: {type: string}
+    required: [hook, if, else]
 
   build:
     type: object
@@ -143,10 +125,7 @@ properties:
 
   wiki:
     type: object
-    required: [hook, 'else:host']
-    hook:
-      type: object
-      required: [pre, post]
+    required: [hook, if, else]
 
   wikiup:
     type: object
@@ -211,13 +190,26 @@ vm:
 
 bips:
   hook:
-    logger:
-      pre: '$(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 0"'
-      post: '$(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 1"'
-    printm:
-      pre: $(PRINTM) magenta $@ start
-      post: $(PRINTM) magenta $@ stop
-  else:host: echo "'make $@' isn't yet supported on $(HOSTOS)."
+    pre:
+      do:
+      - '@ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 0")'
+      - '@ ($(PRINTM) magenta $@ start)'
+    post:
+      do:
+      - '@ ($(PRINTM) magenta $@ stop)'
+      - '@ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 1")'
+  if:
+    host:
+      is:
+        mac:
+          do:
+          - '@-(rm -rf docs/bips)'
+          - '@ (cd docs && git clone $(DeOS_GIT_REPO_BIPS))'
+          - '@ (rm -rf docs/bips/.git)'
+  else:
+    host:
+      do:
+      - "@ (echo \"'make $@' isn't yet supported on $(HOSTOS).\")"
 
 build:
   hook:
@@ -288,9 +280,26 @@ webpy:
 
 wiki:
   hook:
-    pre: $(PRINTM) cyan $@ start
-    post: $(PRINTM) cyan $@ stop
-  else:host: echo "'make $@' isn't yet supported on $(HOSTOS)."
+    pre:
+      do:
+      - '@ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 0")'
+      - '@ ($(PRINTM) cyan $@ start)'
+    post:
+      do:
+      - '@ ($(PRINTM) cyan $@ stop)'
+      - '@ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 1")'
+  if:
+    host:
+      is:
+        mac:
+          do:
+          - '@-(rm -rf var/wiki)'
+          - '@ (cd var && git clone $(DeOS_GIT_REPO_WIKI) wiki)'
+          - '@ (rm -rf var/wiki/.git)'
+  else:
+    host:
+      do:
+      - "@ (echo \"'make $@' isn't yet supported on $(HOSTOS).\")"
 
 wikiup:
   hook:
@@ -302,7 +311,7 @@ wikiup:
 
 ## Template
 
-```makefile
+```sh
 Δ with (data=None)
 
 export MAKEFLAGS=Δ(data['makeflags'])
@@ -336,15 +345,11 @@ endif
 
 wiki:
 ifeq ($(HOSTOS),$(ISMAC))
-    @ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 0")
-    @ (Δ(data['wiki']['hook']['pre']))
-    @-(rm -rf var/wiki)
-    @ (cd var && git clone $(DeOS_GIT_REPO_WIKI) wiki)
-    @ (rm -rf var/wiki/.git)
-    @ (Δ(data['wiki']['hook']['post']))
-    @ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 1")
+    Δfor action in data['wiki']['hook']['pre']['do']: Δ(action)
+    Δfor action in data['wiki']['if']['host']['is']['mac']['do']: Δ(action)
+    Δfor action in data['wiki']['hook']['post']['do']: Δ(action)
 else
-    @ (Δ(data['wiki']['else:host']))
+    Δfor action in data['wiki']['else']['host']['do']: Δ(action)
 endif
 
 
@@ -389,15 +394,11 @@ endif
 
 bips:
 ifeq ($(HOSTOS),$(ISMAC))
-    @ (Δ(data['bips']['hook']['logger']['pre']))
-    @ (Δ(data['bips']['hook']['printm']['pre']))
-    @-(rm -rf doc/bips)
-    @ (cd doc && git clone $(DeOS_GIT_REPO_BIPS))
-    @ (rm -rf doc/bips/.git)
-    @ (Δ(data['bips']['hook']['printm']['post']))
-    @ (Δ(data['bips']['hook']['logger']['post']))
+    Δfor action in data['bips']['hook']['pre']['do']: Δ(action)
+    Δfor action in data['bips']['if']['host']['is']['mac']['do']: Δ(action)
+    Δfor action in data['bips']['hook']['post']['do']: Δ(action)
 else
-    @ (Δ(data['bips']['else:host']))
+    Δfor action in data['bips']['else']['host']['do']: Δ(action)
 endif
 
 
@@ -444,7 +445,7 @@ endif
     @-(rm src/web/.gitignore)
     @-(rm src/web/.travis.yml)
     @ (mv src/web/test test/web)
-    @ (mv src/web/docs doc/web)
+    @ (mv src/web/docs docs/web)
     @ (Δ(data['webpy']['hook']['post']))
     @ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 1")
 else

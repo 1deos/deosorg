@@ -90,9 +90,9 @@ bips:
 ifeq ($(HOSTOS),$(ISMAC))
 	@ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 0")
 	@ ($(PRINTM) magenta $@ start)
-	@-(rm -rf doc/bips)
-	@ (cd doc && git clone $(DeOS_GIT_REPO_BIPS))
-	@ (rm -rf doc/bips/.git)
+	@-(rm -rf docs/bips)
+	@ (cd docs && git clone $(DeOS_GIT_REPO_BIPS))
+	@ (rm -rf docs/bips/.git)
 	@ ($(PRINTM) magenta $@ stop)
 	@ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 1")
 else
@@ -147,7 +147,7 @@ endif
 	@-(rm src/web/.gitignore)
 	@-(rm src/web/.travis.yml)
 	@ (mv src/web/test test/web)
-	@ (mv src/web/docs doc/web)
+	@ (mv src/web/docs docs/web)
 	@ ($(PRINTM) magenta $@ stop)
 	@ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 1")
 else
