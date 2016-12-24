@@ -1,4 +1,4 @@
-# `var/build/bootstrap.sh`
+# `bootstrap.sh`
 
 ## Schema
 
@@ -38,8 +38,8 @@ EXIT_FAILURE() {
 deos_bin() {
   for path in .deos/bin/darwin .deos/bin/vagrant .deos/bin/travis
   do
-    [ ! -f "$path/deos" ] && cp src/deos.py $path/deos
-    [ -f "$path/deos" ] && chmod +x $path/deos
+    [ ! -f "$path/tao" ] && cp src/tao.py $path/tao
+    [ -f "$path/tao" ] && chmod +x $path/tao
     [ ! -f "$path/logger" ] && cp src/logger.py $path/logger
     [ -f "$path/logger" ] && chmod +x $path/logger
     [ ! -f "$path/print" ] && cp src/print.py $path/print
@@ -58,9 +58,10 @@ deos_venv() {
 }
 
 deos_init() {
-  for path in .deos .deos/bin .deos/obj .deos/venv\
-              .deos/bin/darwin .deos/bin/vagrant .deos/bin/travis\
-              .deos/obj/darwin .deos/obj/vagrant .deos/obj/travis\
+  [ ! -d ".cache" ] && mkdir .cache
+  for path in .deos .deos/bin .deos/obj .deos/venv\\n
+              .deos/bin/darwin .deos/bin/vagrant .deos/bin/travis\\n
+              .deos/obj/darwin .deos/obj/vagrant .deos/obj/travis\\n
               .deos/venv/darwin .deos/venv/vagrant .deos/venv/travis
   do
     [ ! -d "$path" ] && mkdir $path
@@ -68,6 +69,7 @@ deos_init() {
 }
 
 deos_clean() {
+  [ -d ".vagrant" ] && rm -rf .vagrant/
   [ -d ".deos" ] && rm -rf .deos/
   [ -d "src/web" ] && rm -rf src/web/
   [ -d "doc/web" ] && rm -rf doc/web/
@@ -78,15 +80,17 @@ deos_clean() {
   [ -f ".editorconfig" ] && rm .editorconfig
   [ -f ".gitignore" ] && rm .gitignore
   [ -f ".nvmrc" ] && rm .nvmrc
+  [ -f ".travis.yml" ] && rm .travis.yml
+  [ -f "bootstrap.test.sh" ] && rm bootstrap.test.sh
   [ -f "Makefile" ] && rm Makefile
 }
 
 deos_darwin() {
   deos_clean
   deos_init
-  #deos_venv "darwin"
+  deos_venv "darwin"
   deos_bin
-  .deos/bin/darwin/deos
+  .deos/bin/darwin/tao
   EXIT_SUCCESS
 }
 
@@ -111,29 +115,10 @@ main() {
 main
 ```
 
-## Test: Environment
+## Test
 
 ```yaml
 a: 1
 b: 2
 c: 3
 ```
-
-## Test: Pass
-
-```sh
-#!/bin/sh
-echo "1"
-echo "2"
-echo "3"
-```
-
-## Test: Fail
-
-```sh
-#!/bin/sh
-echo "3"
-echo "2"
-echo "1"
-```
-

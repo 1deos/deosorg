@@ -4,5 +4,5 @@
 int
 main(int argc, char const *argv[])
 {   printf("hello, world!\n");
-    return EXIT_SUCCESS;
+	return EXIT_SUCCESS;
 }

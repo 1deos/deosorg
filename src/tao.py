@@ -14,25 +14,57 @@ def build(template,data,ftype):
     code=None
     if 'sh'==ftype:
         code=web.template.Template(template.replace('$','$$'
-                                          ).replace('Δ with', '$def with'
+                                          ).replace('Δ with','$def with'
                                           ).replace('Δ','$'
                                           ).replace('#!/bin/sh','##!/bin/sh'))
     elif 'ruby'==ftype:
         code=web.template.Template(template.replace('$','$$'
-                                          ).replace('Δ with', '$def with'
+                                          ).replace('Δ with','$def with'
                                           ).replace('Δ','$'
                                           ).replace('# -*-','## -*-'))
+    elif 'python'==ftype:
+        code=web.template.Template(template.replace('$','$$'
+                                          ).replace('Δ with','$def with'
+                                          ).replace('Δ','$'
+                                          ).replace('#!/usr/bin/env python',
+                                                    '##!/usr/bin/env python'))
     else:
         code=web.template.Template(template.replace('$','$$'
-                                          ).replace('Δ with', '$def with'
+                                          ).replace('Δ with','$def with'
                                           ).replace('Δ','$'))
-    return str(code(data)).replace(4*' ','\t'
-                         ).replace('$(False)','$(FALSE)'
-                         ).replace('$(True)','$(TRUE)'
-                         ).replace('\n\nifeq','\nifeq'
-                         ).replace('\n\nelse','\nelse'
-                         ).replace('\n\nendif','\nendif'
-                         )[1:]
+
+    if 'ruby'==ftype:
+        return str(code(data)).replace('$(False)','$(FALSE)'
+                             ).replace('$(True)','$(TRUE)'
+                             ).replace('\n\nifeq','\nifeq'
+                             ).replace('\n\nelse','\nelse'
+                             ).replace('\n\nendif','\nendif'
+                             )[1:]
+    elif 'sh'==ftype:
+        return str(code(data)).replace('\\\\n','\\'
+                             ).replace('$(False)','$(FALSE)'
+                             ).replace('$(True)','$(TRUE)'
+                             ).replace('\n\nifeq','\nifeq'
+                             ).replace('\n\nelse','\nelse'
+                             ).replace('\n\nendif','\nendif'
+                             )[1:]
+    elif 'make'==ftype:
+        return str(code(data)).replace('\\\\n','\\'
+                             ).replace(4*' ','\t'
+                             ).replace('$(False)','$(FALSE)'
+                             ).replace('$(True)','$(TRUE)'
+                             ).replace('\n\nifeq','\nifeq'
+                             ).replace('\n\nelse','\nelse'
+                             ).replace('\n\nendif','\nendif'
+                             )[1:]
+    else:
+        return str(code(data)).replace(4*' ','\t'
+                             ).replace('$(False)','$(FALSE)'
+                             ).replace('$(True)','$(TRUE)'
+                             ).replace('\n\nifeq','\nifeq'
+                             ).replace('\n\nelse','\nelse'
+                             ).replace('\n\nendif','\nendif'
+                             )[1:]
 
 def get_environment(data,raw,debug=False):
     try:
@@ -82,7 +114,7 @@ def get_template(data,raw,debug=False):
     try:
         res=''
         template=data.split('## Template\n\n```')[1].split(\
-            '```\n\n## Test: Environment')[0]
+            '```\n\n## Test')[0]
         line=template.split('\n')
         for i in range(0,len(line)):
             if i!=0 and i!=len(line)-1:
@@ -104,7 +136,8 @@ def main():
             if value['type']=='make' or value['type']=='sh'\
                 or value['type']=='gitignore' or value['type']=='ini'\
                 or value['type']=='nvmrc' or value['type']=='ruby'\
-                or value['type']=='lz' or value['type']=='yaml':
+                or value['type']=='lz' or value['type']=='yaml'\
+                or value['type']=='c' or value['type']=='python':
                 with open(value['meta']) as f:
                     raw=f.read()
             if isinstance(raw,basestring):

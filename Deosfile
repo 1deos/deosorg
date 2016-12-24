@@ -1,5 +1,9 @@
 author=atd@gmx.it
-version=v0.8-alpha.3
+version=v0.8-alpha.4
+
+[.deosrc]
+meta=meta/Δ:.deosrc.md
+type=make
 
 [.nvmrc]
 meta=meta/Δ:.nvmrc.md
@@ -17,9 +21,17 @@ type=lz
 meta=meta/Δ:src:example.md
 type=sh
 
-[var/build/bootstrap.sh]
-meta=meta/Δ:bootstrap.md
-type=sh
+[src/hello.c]
+meta=meta/Δ:src:hello:c.md
+type=c
+
+[src/hello.py]
+meta=meta/Δ:src:hello:py.md
+type=python
+
+[src/logger.py]
+meta=meta/Δ:src:logger.md
+type=python
 
 [.editorconfig]
 meta=meta/Δ:.editorconfig.md
@@ -34,9 +46,13 @@ meta=meta/Δ:.travis.md
 type=yaml
 
 [Makefile]
-meta=meta/Δ:Makefile.md
+meta=meta/Δ:makefile.md
 type=make
 
 [Vagrantfile]
-meta=meta/Δ:Vagrantfile.md
+meta=meta/Δ:vagrantfile.md
 type=ruby
+
+[bootstrap.sh]
+meta=meta/Δ:bootstrap.md
+type=sh

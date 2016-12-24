@@ -1,4 +1,4 @@
-# `src/example.sh`
+# `src/hello.py`
 
 ## Schema
 
@@ -21,12 +21,18 @@ c: 3
 
 ## Template
 
-```sh
+```python
 Δ with (data=None)
-#!/bin/sh
-echo "Δ(data['a'])"
-echo "Δ(data['b'])"
-echo "Δ(data['c'])"
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from __future__ import print_function
+
+def main():
+    print('hello, world!')
+
+if __name__=="__main__":
+    main()
 ```
 
 ## Test

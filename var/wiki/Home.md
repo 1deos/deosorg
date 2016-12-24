@@ -14,9 +14,6 @@
         <b>﹂</b> <a href="#rules">
         Rules
         </a><br>
-        <b>&nbsp;&nbsp;&nbsp;﹂</b> <a href="#xanadu">
-        Xanadu
-        </a><br>
         <b>&nbsp;&nbsp;&nbsp;﹂</b> <a href="#style">
         Style
         </a><br>
@@ -35,43 +32,15 @@
         <b>&nbsp;&nbsp;&nbsp;﹂</b> <a href="#portability">
         Portability
         </a><br>
+        <b>&nbsp;&nbsp;&nbsp;﹂</b> <a href="#xanadu">
+        Xanadu
+        </a><br>
       </td>
     </tr>
   </tbody>
 </table>
 
 ## Rules
-
-### Xanadu
-
-* Every Xanadu server is uniquely and securely identified.
-* Every Xanadu server can be operated independently or in a network.
-* Every user is uniquely and securely identified.
-* Every user can search, retrieve, create and store documents.
-* Every document can consist of any number of parts each of which may be of any
-data type.
-* Every document can contain links of any type including virtual copies
-("transclusions") to any other document in the system accessible to its owner.
-* Links are visible and can be followed from all endpoints.
-* Permission to link to a document is explicitly granted by the act of
-publication.
-* Every document can contain a royalty mechanism at any desired degree of
-granularity to ensure payment on any portion accessed, including virtual copies
-("transclusions") of all or part of the document.
-* Every document is uniquely and securely identified.
-* Every document can have secure access controls.
-* Every document can be rapidly searched, stored and retrieved without user
-knowledge of where it is physically stored.
-* Every document is automatically moved to physical storage appropriate to its
-frequency of access from any given location.
-* Every document is automatically stored redundantly to maintain availability
-even in case of a disaster.
-* Every Xanadu service provider can charge their users at any rate they choose
-for the storage, retrieval and publishing of documents.
-* Every transaction is secure and auditable only by the parties to that
-transaction.
-* The Xanadu client-server communication protocol is an openly published
-standard. Third-party software development and integration is encouraged.
 
 ### Style
 
@@ -183,3 +152,34 @@ standard. Third-party software development and integration is encouraged.
 * Maintain compatibility with existing programs and data.
 * Don't assume ASCII.
 * Don't assume English.
+
+### Xanadu
+
+* Every Xanadu server is uniquely and securely identified.
+* Every Xanadu server can be operated independently or in a network.
+* Every user is uniquely and securely identified.
+* Every user can search, retrieve, create and store documents.
+* Every document can consist of any number of parts each of which may be of any
+data type.
+* Every document can contain links of any type including virtual copies
+("transclusions") to any other document in the system accessible to its owner.
+* Links are visible and can be followed from all endpoints.
+* Permission to link to a document is explicitly granted by the act of
+publication.
+* Every document can contain a royalty mechanism at any desired degree of
+granularity to ensure payment on any portion accessed, including virtual copies
+("transclusions") of all or part of the document.
+* Every document is uniquely and securely identified.
+* Every document can have secure access controls.
+* Every document can be rapidly searched, stored and retrieved without user
+knowledge of where it is physically stored.
+* Every document is automatically moved to physical storage appropriate to its
+frequency of access from any given location.
+* Every document is automatically stored redundantly to maintain availability
+even in case of a disaster.
+* Every Xanadu service provider can charge their users at any rate they choose
+for the storage, retrieval and publishing of documents.
+* Every transaction is secure and auditable only by the parties to that
+transaction.
+* The Xanadu client-server communication protocol is an openly published
+standard. Third-party software development and integration is encouraged.

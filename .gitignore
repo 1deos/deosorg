@@ -11,7 +11,6 @@ etc/blockstack/*
 etc/zerotier/*
 node_modules/
 var/backup/*
-var/build/
 var/log/deos/*
 
 #[dotfiles]

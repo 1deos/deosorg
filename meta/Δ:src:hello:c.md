@@ -1,4 +1,4 @@
-# `src/example.sh`
+# `src/hello.c`
 
 ## Schema
 
@@ -21,12 +21,17 @@ c: 3
 
 ## Template
 
-```sh
+```c
 Δ with (data=None)
-#!/bin/sh
-echo "Δ(data['a'])"
-echo "Δ(data['b'])"
-echo "Δ(data['c'])"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int
+main(int argc, char const *argv[])
+{   printf("hello, world!\n");
+    return EXIT_SUCCESS;
+}
 ```
 
 ## Test
