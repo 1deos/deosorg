@@ -146,7 +146,7 @@ endif
 	@ (rm -rf src/web/.git)
 	@-(rm src/web/.gitignore)
 	@-(rm src/web/.travis.yml)
-	@ (mv src/web/test test/web)
+	@ (mv src/web/test tests/web)
 	@ (mv src/web/docs docs/web)
 	@ ($(PRINTM) magenta $@ stop)
 	@ ($(LOGGER) "INFO" "$(HOSTOS) : make : $@ : 1")

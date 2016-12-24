@@ -47,8 +47,8 @@ deos_clean() {
   [ -d ".vagrant" ] && rm -rf .vagrant/
   [ -d ".deos" ] && rm -rf .deos/
   [ -d "src/web" ] && rm -rf src/web/
-  [ -d "doc/web" ] && rm -rf doc/web/
-  [ -d "test/web" ] && rm -rf test/web/
+  [ -d "docs/web" ] && rm -rf docs/web/
+  [ -d "tests/web" ] && rm -rf tests/web/
   [ -f "boot/init.lz" ] && rm boot/init.lz
   [ -f "boot/python.lz" ] && rm boot/python.lz
   [ -f "src/example.sh" ] && rm src/example.sh
