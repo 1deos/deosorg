@@ -5,6 +5,7 @@
 #[dotfolders]
 .cache/
 .deos/
+.venv/
 
 #[folders]
 etc/blockstack/*
@@ -12,6 +13,8 @@ etc/zerotier/*
 node_modules/
 var/backup/*
 var/log/deos/*
+var/privkey/*
+tests/blockstack/integration/*
 
 #[dotfiles]
 .DS_Store
@@ -27,3 +30,5 @@ yarn-error.log
 !etc/zerotier/.gitprivate
 !var/backup/.gitprivate
 !var/log/deos/.gitprivate
+!var/privkey/.gitprivate
+

@@ -1,0 +1,13 @@
+build/
+dist/
+python_trezor.egg-info/
+trezor.egg-info/
+*.pyc
+*.bin
+*.png
+*.py.cache
+distribute-*.egg
+distribute-*.tar.gz
+docs/_build
+docs/.docs-build-environment
+.tox/

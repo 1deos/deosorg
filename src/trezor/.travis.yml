@@ -1,0 +1,30 @@
+language: python
+
+# Runs jobs on container based infrastructure
+sudo: false
+
+# Saves pip downloads/wheels between builds
+cache:
+  directories:
+    - $HOME/.cache/pip
+
+addons:
+    apt:
+        packages:
+            - libudev-dev
+            - libusb-1.0-0-dev
+
+python:
+    - "2.7"
+    - "3.4"
+    - "3.5"
+
+before_install:
+   - pip install setuptools --upgrade
+
+install:
+    # Optimisation: build requirements as wheels, which get cached by Travis
+    - pip install "pip>=7.0" wheel
+
+script:
+    - python setup.py install
