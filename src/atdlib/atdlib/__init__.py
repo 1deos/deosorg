@@ -5,7 +5,7 @@
 
 __author__  = "Andrew DeSantis <atd@gmx.it>"
 __license__ = "GPLv3"
-__version__ = "v0.8-alpha.8"
+__version__ = "v0.8-alpha.9"
 
 import atdlib.deos  as deos
 import atdlib.vault as vault
