@@ -1,29 +1,45 @@
 #[wildcards]
+app/vault/.*.swp
+app/vault/*.kpf
+app/vault/*.pwdb*
+app/vault/ui_*py
 *.o
 *.pyc
+*.pwdb
 
 #[dotfolders]
-.cache/
-.deos/
-.venv/
+.backup/
 
 #[folders]
+app/vault/src/atdlib/
+bin/
 etc/blockstack/*
 etc/zerotier/*
+ext/pyqt/
+ext/sip/
+include/.macro/
+obj/
 node_modules/
+tests/blockstack/integration/*
 var/backup/*
 var/log/deos/*
 var/privkey/*
-tests/blockstack/integration/*
+venv/
 
 #[dotfiles]
 .DS_Store
 .nvmrc
 
 #[files]
+geckodriver.log
 npm-debug.log
-src/example.sh
 yarn-error.log
+app/vault/src/ui_*_dialog.py
+app/vault/src/ui_mainwindow.py
+app/vault/Crypto
+app/vault/trezorlib
+app/vault/TrezorPass.pro.user
+src/example.sh
 
 #[except]
 !etc/blockstack/.gitprivate
@@ -31,4 +47,3 @@ yarn-error.log
 !var/backup/.gitprivate
 !var/log/deos/.gitprivate
 !var/privkey/.gitprivate
-

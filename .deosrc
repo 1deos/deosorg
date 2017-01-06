@@ -1,41 +1,55 @@
-FALSE:=0
-TRUE:=1
+export MAKEFLAGS   := --no-print-directory
+.DEFAULT_GOAL      := all
+.SUBLIME_TARGETS:     all
+.PHONY:               all\
+                      build\
+                      clean\
+                      help\
+                      install\
+                      run\
+                      test\
+                      uninstall\
+                      vault
+APP                := $(CURDIR)/app
+BIN                := $(CURDIR)/bin
+ETC                := $(CURDIR)/etc
+EXT                := $(CURDIR)/ext
+INCLUDE            := $(CURDIR)/include
+LIB                := $(CURDIR)/lib
+OBJ                := $(CURDIR)/obj/darwin
+SRC                := $(CURDIR)/src
+TEST               := $(CURDIR)/test
+MACRO              := $(INCLUDE)/.macro
+VAULT              := $(APP)/vault
+VENV               := $(CURDIR)/venv/darwin
+FILES              := $(wildcard $(LIB)/*.c)
+TFILES             := $(wildcard $(TEST)/*.c)
+TBINS              := $(patsubst $(TEST)/%,$(BIN)/darwin/%,$(TFILES:.c=.test))
+OBJECTS            := $(patsubst $(LIB)/%,$(OBJ)/%,$(FILES:.c=.o))
+UI_GENERATED       := $(VAULT)/src/ui_mainwindow.py\
+                      $(VAULT)/src/ui_addgroup_dialog.py\
+                      $(VAULT)/src/ui_trezor_passphrase_dialog.py\
+                      $(VAULT)/src/ui_add_password_dialog.py\
+                      $(VAULT)/src/ui_initialize_dialog.py\
+                      $(VAULT)/src/ui_enter_pin_dialog.py\
+                      $(VAULT)/src/ui_trezor_chooser_dialog.py
+CC                 := clang
+CFLAGS             := -std=c89 -Wall -g
+CEXE               := $(BIN)/darwin/deos
+CINCLUDE           := -I$(VENV)/include/python2.7 -I$(MACRO)
+CLINK              := -lpython2.7
+CTARGET            := $(SRC)/main.c
+MKDIR              := mkdir
+NEWENV             := virtualenv --always-copy --no-site-packages
+PIP                := pip
+PYQT               := ext/pyqt
+RM                 := rm -rf
+SETENV             := source $(VENV)/bin/activate
+DEOS               := $(SETENV) && deos
+QMAKE              := /usr/local/Cellar/qt5/5.7.0/bin/qmake
+REQUIRE            := $(ETC)/python/requirements.txt
+SIP                := ext/sip
+VIRTUAL            := venv/darwin
+XMCC               := cd $(SRC) && python xmcc.py
+XMOD               := chmod +x
 
-IS_FALSE:=$(FALSE)
-IS_TRUE:=$(TRUE)
-IS_MAC:=Darwin
-IS_LINUX:=Linux
-
-BASEDIR:=$(CURDIR)
-HOSTOS:=$(shell uname -s)
-ISFALSE:=$(FALSE)
-ISLINUX:=Linux
-ISMAC:=Darwin
-ISTRUE:=$(TRUE)
-SETCACHE:=$(TRUE)
-USECACHE:=$(FALSE)
-
-UPCMD:="vagrant up --provider virtualbox"
-ifeq ($(HOSTOS),$(ISMAC))
-LOGGER:=$(BASEDIR)/.deos/bin/darwin/logger
-PRINTM:=$(BASEDIR)/.deos/bin/darwin/print
-SPINNER:=$(BASEDIR)/.deos/bin/darwin/spinner
-else
-LOGGER:=$(BASEDIR)/.deos/bin/travis/logger
-PRINTM:=$(BASEDIR)/.deos/bin/travis/print
-SPINNER:=$(BASEDIR)/.deos/bin/travis/spinner
-endif
-
-DeOS_GIT_REPO_BIPS:=git@github.com:bitcoin/bips.git
-DeOS_GIT_REPO_HYPER:=git@github.com:zeit/hyper.git
-DeOS_GIT_REPO_WEB:=git@github.com:webpy/webpy.git
-DeOS_GIT_REPO_WIKI:=git@github.com:DeSantisInc/DeOS.wiki.git
-
-export DeOS_VM_BOX:=bento/ubuntu-16.04
-export DeOS_VM_SHELL_DEFAULT:=bash -c 'BASH_ENV=/etc/profile exec bash'
-export DeOS_VM_SHELL_SSH:=bash -l
-
-DeOS_ADD_DOTDEOS:=mkdir .deos .deos/bin .deos/bin/darwin .deos/bin/vagrant .deos/bin/travis .deos/obj .deos/obj/darwin .deos/obj/vagrant .deos/obj/travis .deos/venv .deos/venv/darwin .deos/venv/vagrant .deos/venv/travis
-DeOS_ADD_TRAVIS:=gem install travis --no-rdoc --no-ri
-DeOS_BIN_TRAVIS:=$(shell which travis)
-DeOS_RM_DOTDEOS:=rm -rf .deos

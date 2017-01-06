@@ -1,8 +1,0 @@
-$def with (env=None, factor=None)
-$if env != None:
-  <rect>
-    <x>$(env['x'])</x>
-    <y>$(env['y'])</y>
-    <width>$(env['width'])</width>
-    <height>$(env['height'])</height>
-  </rect>

@@ -1,0 +1,30 @@
+digraph deList {
+    node [fontname="Arial"];
+    node [style=filled,fillcolor=white];
+    1 -> 2;
+    1 -> 9;
+    node [style=filled,fillcolor=white];
+    2 -> 3;
+    2 -> 1;
+    node [style=filled,fillcolor=white];
+    3 -> 4;
+    3 -> 2;
+    node [style=filled,fillcolor=white];
+    4 -> 5;
+    4 -> 3;
+    node [style=filled,fillcolor=white];
+    5 -> 6;
+    5 -> 4;
+    node [style=filled,fillcolor=white];
+    6 -> 7;
+    6 -> 5;
+    node [style=filled,fillcolor=white];
+    7 -> 8;
+    7 -> 6;
+    node [style=filled,fillcolor=white];
+    8 -> 9;
+    8 -> 7;
+    node [style=filled,fillcolor=white];
+    9 -> 1;
+    9 -> 8;
+}

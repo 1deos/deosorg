@@ -1,1 +1,0 @@
-© 2016 DeSantis Inc. All Rights Reserved.
