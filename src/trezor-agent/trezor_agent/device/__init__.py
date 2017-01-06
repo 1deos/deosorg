@@ -1,4 +1,5 @@
-"""Cryptographic hardware device management."""
+""" Cryptographic hardware device management.
+"""
 
 import logging
 
@@ -15,9 +16,9 @@ DEVICE_TYPES = [
     ledger.LedgerNanoS,
 ]
 
-
 def detect():
-    """Detect the first available device and return it to the user."""
+    """ Detect the first available device and return it to the user.
+    """
     for device_type in DEVICE_TYPES:
         try:
             with device_type() as d:

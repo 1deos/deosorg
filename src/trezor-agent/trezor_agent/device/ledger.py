@@ -1,4 +1,5 @@
-"""Ledger-related code (see https://www.ledgerwallet.com/)."""
+""" Ledger-related code (see https://www.ledgerwallet.com/).
+"""
 
 import binascii
 import logging
@@ -10,14 +11,14 @@ from . import interface
 
 log = logging.getLogger(__name__)
 
-
 def _expand_path(path):
-    """Convert BIP32 path into bytes."""
+    """ Convert BIP32 path into bytes.
+    """
     return b''.join((struct.pack('>I', e) for e in path))
 
-
 def _convert_public_key(ecdsa_curve_name, result):
-    """Convert Ledger reply into PublicKey object."""
+    """ Convert Ledger reply into PublicKey object.
+    """
     if ecdsa_curve_name == 'nist256p1':
         if (result[64] & 1) != 0:
             result = bytearray([0x03]) + result[1:33]
@@ -32,12 +33,13 @@ def _convert_public_key(ecdsa_curve_name, result):
         result = b'\x00' + bytes(keyY)
     return bytes(result)
 
-
 class LedgerNanoS(interface.Device):
-    """Connection to Ledger Nano S device."""
+    """ Connection to Ledger Nano S device.
+    """
 
     def connect(self):
-        """Enumerate and connect to the first USB HID interface."""
+        """ Enumerate and connect to the first USB HID interface.
+        """
         try:
             return comm.getDongle()
         except comm.CommException as e:
@@ -45,7 +47,8 @@ class LedgerNanoS(interface.Device):
                 '{} not connected: "{}"'.format(self, e))
 
     def pubkey(self, identity, ecdh=False):
-        """Get PublicKey object for specified BIP32 address and elliptic curve."""
+        """ Get PublicKey object for specified BIP32 address & elliptic curve.
+        """
         curve_name = identity.get_curve_name(ecdh)
         path = _expand_path(identity.get_bip32_address(ecdh))
         if curve_name == 'nist256p1':
@@ -60,7 +63,8 @@ class LedgerNanoS(interface.Device):
         return _convert_public_key(curve_name, result)
 
     def sign(self, identity, blob):
-        """Sign given blob and return the signature (as bytes)."""
+        """ Sign given blob and return the signature (as bytes).
+        """
         path = _expand_path(identity.get_bip32_address(ecdh=False))
         if identity.identity_dict['proto'] == 'ssh':
             ins = '04'
@@ -95,7 +99,8 @@ class LedgerNanoS(interface.Device):
             return bytes(result[:64])
 
     def ecdh(self, identity, pubkey):
-        """Get shared session key using Elliptic Curve Diffie-Hellman."""
+        """ Get shared session key using Elliptic Curve Diffie-Hellman.
+        """
         path = _expand_path(identity.get_bip32_address(ecdh=True))
         if identity.curve_name == 'nist256p1':
             p2 = '01'

@@ -1,22 +1,25 @@
 #!/bin/bash
 set -eu
 
-gpg2 --version >/dev/null  # verify that GnuPG 2 is installed
+# verify that GnuPG 2 is installed
+gpg2 --version >/dev/null
 
 USER_ID="${1}"
 HOMEDIR=~/.gnupg/trezor
-CURVE=${CURVE:="nist256p1"}  # or "ed25519"
-TIMESTAMP=${TIMESTAMP:=`date +%s`}  # key creation timestamp
+CURVE=${CURVE:="nist256p1"} # or "ed25519"
+TIMESTAMP=${TIMESTAMP:=`date +%s`} # key creation timestamp
 
 # Prepare new GPG home directory for TREZOR-based identity
-rm -rf "${HOMEDIR}"
-mkdir -p "${HOMEDIR}"
-chmod 700 "${HOMEDIR}"
+rm -rf "${HOMEDIR}" && mkdir -p "${HOMEDIR}" && chmod 700 "${HOMEDIR}"
 
 # Generate new GPG identity and import into GPG keyring
-trezor-gpg-create -v "${USER_ID}" -t "${TIMESTAMP}" -e "${CURVE}" > "${HOMEDIR}/pubkey.asc"
+trezor-gpg-create -v "${USER_ID}" \
+                  -t "${TIMESTAMP}" \
+                  -e "${CURVE}" > "${HOMEDIR}/pubkey.asc"
 gpg2 --homedir "${HOMEDIR}" --import < "${HOMEDIR}/pubkey.asc"
-rm -f "${HOMEDIR}/S.gpg-agent"  # (otherwise, our agent won't be started automatically)
+
+# (otherwise, our agent won't be started automatically)
+rm -f "${HOMEDIR}/S.gpg-agent"
 
 # Make new GPG identity with "ultimate" trust (via its fingerprint)
 FINGERPRINT=$(gpg2 --homedir "${HOMEDIR}" --list-public-keys --with-fingerprint --with-colons | sed -n -E 's/^fpr:::::::::([0-9A-F]+):$/\1/p' | head -n1)

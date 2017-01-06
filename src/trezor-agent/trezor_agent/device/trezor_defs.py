@@ -1,4 +1,5 @@
-"""TREZOR-related definitions."""
+""" TREZOR-related definitions.
+"""
 
 # pylint: disable=unused-import
 

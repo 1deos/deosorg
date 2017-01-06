@@ -1,4 +1,5 @@
-"""KeepKey-related definitions."""
+""" KeepKey-related definitions.
+"""
 
 # pylint: disable=unused-import
 

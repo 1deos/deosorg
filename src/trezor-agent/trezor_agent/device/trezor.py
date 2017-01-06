@@ -1,4 +1,5 @@
-"""TREZOR-related code (see http://bitcointrezor.com/)."""
+""" TREZOR-related code (see http://bitcointrezor.com/).
+"""
 
 import binascii
 import logging
@@ -10,10 +11,9 @@ from . import interface
 
 log = logging.getLogger(__name__)
 
-
 class Trezor(interface.Device):
-    """Connection to TREZOR device."""
-
+    """ Connection to TREZOR device.
+    """
     @property
     def _defs(self):
         from . import trezor_defs
@@ -23,7 +23,8 @@ class Trezor(interface.Device):
     passphrase = os.environ.get('TREZOR_PASSPHRASE', '')
 
     def connect(self):
-        """Enumerate and connect to the first USB HID interface."""
+        """ Enumerate and connect to the first USB HID interface.
+        """
         def passphrase_handler(_):
             log.debug('using %s passphrase for %s',
                       'non-empty' if self.passphrase else 'empty', self)
@@ -53,11 +54,13 @@ class Trezor(interface.Device):
         raise interface.NotFoundError('{} not connected'.format(self))
 
     def close(self):
-        """Close connection."""
+        """ Close connection.
+        """
         self.conn.close()
 
     def pubkey(self, identity, ecdh=False):
-        """Return public key."""
+        """ Return public key.
+        """
         curve_name = identity.get_curve_name(ecdh=ecdh)
         log.debug('"%s" getting public key (%s) from %s',
                   identity, curve_name, self)
@@ -74,7 +77,8 @@ class Trezor(interface.Device):
         return result
 
     def sign(self, identity, blob):
-        """Sign given blob and return the signature (as bytes)."""
+        """ Sign given blob and return the signature (as bytes).
+        """
         curve_name = identity.get_curve_name(ecdh=False)
         log.debug('"%s" signing %r (%s) on %s',
                   identity, blob, curve_name, self)
@@ -94,7 +98,8 @@ class Trezor(interface.Device):
             raise interface.DeviceError(msg)
 
     def ecdh(self, identity, pubkey):
-        """Get shared session key using Elliptic Curve Diffie-Hellman."""
+        """ Get shared session key using Elliptic Curve Diffie-Hellman.
+        """
         curve_name = identity.get_curve_name(ecdh=True)
         log.debug('"%s" shared session key (%s) for %r from %s',
                   identity, curve_name, pubkey, self)

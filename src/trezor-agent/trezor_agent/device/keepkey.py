@@ -1,11 +1,12 @@
-"""KeepKey-related code (see https://www.keepkey.com/)."""
+""" KeepKey-related code (see: https://www.keepkey.com/).
+"""
 
 from . import trezor
 from .. import formats
 
-
 def _verify_support(identity, ecdh):
-    """Make sure the device supports given configuration."""
+    """ Make sure the device supports given configuration.
+    """
     protocol = identity.identity_dict['proto']
     if protocol not in {'ssh'}:
         raise NotImplementedError(
@@ -16,10 +17,9 @@ def _verify_support(identity, ecdh):
         raise NotImplementedError(
             'Unsupported elliptic curve: {}'.format(identity.curve_name))
 
-
 class KeepKey(trezor.Trezor):
-    """Connection to KeepKey device."""
-
+    """ Connection to KeepKey device.
+    """
     @property
     def _defs(self):
         from . import keepkey_defs
@@ -28,10 +28,12 @@ class KeepKey(trezor.Trezor):
     required_version = '>=1.0.4'
 
     def pubkey(self, identity, ecdh=False):
-        """Return public key."""
+        """ Return public key.
+        """
         _verify_support(identity, ecdh)
         return trezor.Trezor.pubkey(self, identity=identity, ecdh=ecdh)
 
     def ecdh(self, identity, pubkey):
-        """No support for ECDH in KeepKey firmware."""
+        """ No support for ECDH in KeepKey firmware.
+        """
         _verify_support(identity, ecdh=True)
