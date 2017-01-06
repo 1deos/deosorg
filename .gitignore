@@ -20,6 +20,7 @@ ext/sip/
 include/.macro/
 obj/
 node_modules/
+src/atdlib/build/
 tests/blockstack/integration/*
 var/backup/*
 var/log/deos/*

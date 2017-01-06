@@ -2,6 +2,7 @@ export MAKEFLAGS   := --no-print-directory
 .DEFAULT_GOAL      := all
 .SUBLIME_TARGETS:     all
 .PHONY:               all\
+                      atdlib\
                       build\
                       clean\
                       help\

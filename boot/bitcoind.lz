@@ -1,0 +1,5 @@
+MAINTAINER "atd@gmx.it"
+ADD_REPO "ppa:bitcoin/bitcoin" && UPDATE
+INSTALL "bitcoind"
+RUN "bitcoin-cli"
+EXIT_SUCCESS

@@ -1,0 +1,42 @@
+MAINTAINER "atd@gmx.it"
+SUDO_INSTALL "nginx"
+RM "/etc/nginx/nginx.conf"
+NEW "/deos/.deos/etc/linux/nginx/nginx.conf"\
+&& cat <<EOF>> /deos/.deos/etc/linux/nginx/nginx.conf
+user www-data;
+worker_processes 4;
+pid /run/nginx.pid;
+events {
+  worker_connections 768;
+}
+http {
+  sendfile on;
+  tcp_nopush on;
+  tcp_nodelay on;
+  keepalive_timeout 65;
+  types_hash_max_size 2048;
+  include /etc/nginx/mime.types;
+  default_type application/octet-stream;
+  access_log /var/log/nginx/access.log;
+  error_log /var/log/nginx/error.log;
+  gzip on;
+  gzip_disable "msie6";
+  upstream ipython_server {
+    server localhost:8888;
+  }
+  server {
+    listen 80;
+    server_name localhost;
+    location / {
+      proxy_pass http://ipython_server/;
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade \$http_upgrade;
+      proxy_set_header Connection "upgrade";
+    }
+  }
+}
+EOF
+RUN "ln -s /deos/.deos/etc/linux/nginx/nginx.conf /etc/nginx/nginx.conf"
+SUDO_SYSD_RELOAD "nginx"
+SUDO_SYSD_ENABLE "nginx"
+EXIT_SUCCESS

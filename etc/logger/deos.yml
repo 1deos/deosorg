@@ -1,0 +1,26 @@
+version: 1
+
+formatters:
+  simple:
+    format: '[ %(asctime)s : %(name)s : %(levelname)s : %(message)s ]'
+    datefmt: '%s'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+    stream: ext://sys.stdout
+
+  file:
+    class: logging.handlers.RotatingFileHandler
+    formatter: simple
+    filename: var/log/deos/event.log
+    maxBytes: 100000
+    backupCount: 1
+
+loggers:
+  DeOS:
+    level: DEBUG
+    handlers: [file]
+    propagate: no
