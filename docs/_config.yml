@@ -1,8 +1,14 @@
-title: DeOS
-description: ΔOS
-google_analytics: 
-show_downloads: true
-theme: jekyll-theme-tactile
+---
+title: libdeos
 
-gems:
-  - jekyll-mentions
+exclude:
+- app/
+- pypreprocessor/
+- web/
+- Gemfile
+- Gemfile.lock
+- Makefile
+
+plugins:
+- jekyll-mentions
+---

@@ -1,5 +1,4 @@
 root=true
-
 [*]
 charset=utf-8
 end_of_line=lf
@@ -7,12 +6,10 @@ indent_size=4
 indent_style=space
 insert_final_newline=true
 trim_trailing_whitespace=true
-
 [*.{css,html,rb,md,hcl,xml,ui,json,js,jsx,pug,yml,lz,sh}]
 indent_size=2
-
 [{*.mk,.deosrc,.env,Makefile,makefile}]
 indent_style=tab
-
 [{Deosfile,Vagrantfile}]
 indent_size=2
+#[endfi]

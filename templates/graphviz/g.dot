@@ -1,0 +1,8 @@
+Δ with (data=None)
+
+digraph G {
+    node [fontname="Δ(data['fontname'])"];
+    Δfor item in data['data']:
+        node [style=filled,fillcolor=white];
+        "Δ:(item['From'])" -> "Δ:(item['To'])";
+}

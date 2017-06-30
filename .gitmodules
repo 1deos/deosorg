@@ -1,0 +1,9 @@
+[submodule "src/pyboard"]
+	path = src/pyboard
+	url = https://github.com/libdeos/__pyboard.git
+[submodule "src/urbit/urbit"]
+	path = src/urbit/urbit
+	url = https://github.com/libdeos/__urbit.git
+[submodule "src/urbit/urbit-arvo"]
+	path = src/urbit/urbit-arvo
+	url = https://github.com/libdeos/__urbit-arvo.git

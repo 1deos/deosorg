@@ -1,9 +1,7 @@
+---
 dist: trusty
-
 language: generic
-
 os: linux
-
 sudo: false
 
 before_install:
@@ -20,3 +18,4 @@ script:
 
 after_script:
 - echo 'after_script'
+---

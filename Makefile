@@ -1,111 +1,66 @@
 include .deosrc
 
+.DEFAULT_GOAL := all
+.PHONY: all build docs.build docs.start graphviz wikid push run sync venv \
+	wiki.pull wiki.push
+.SUBLIME_TARGETS: all
+
 all:
-	@ $(MAKE) install
-	@ $(MAKE) run
+	@-$(MAKE) build
+	@-$(MAKE) run
 
-atdlib:
-	@-rm -rf src/atdlib/build/ src/atdlib/atdlib/*.pyc
-	@-$(SETENV) && cd src/atdlib && python setup.py install
-	@-$(SETENV) && cd src/atdlib && python setup.py build
-	@-$(SETENV) && cd test && python main.py
-	@-rm -rf src/atdlib/atdlib/*.pyc
+build:
+	@-$(MAKE) venv
+	@-$(MAKE) docs.build
 
-help:
-	@ echo 'export PATH="$(BIN)/darwin:$(PATH)"'
+docs.build:
+	@-$(CD) docs && $(MAKE) build
 
-run: build
-	@ $(DEOS)
+docs.start:
+	$(MAKE) docs.build
+	@-$(CD) docs && $(MAKE)
 
-build: $(OBJECTS)
-	@-$(XMCC)
-	@ $(CC) $(CFLAGS) -I$(INCLUDE) $(CINCLUDE) $(CTARGET) $(OBJECTS) \
-		-o $(CEXE) $(CLINK)
-	@ $(XMOD) $(CEXE)
-	@ clear
+graphviz:
+	@-$(ACTVENV) && $(CD) src && $(PY) graphviz.py
+	@-dot -Tpng var/dot/g.dot > var/img/g.png
 
-install: clean
-	@-$(MKDIR) $(BIN) $(BIN)/darwin $(EXT) $(INCLUDE) $(LIB) $(MACRO)
-	@ $(MAKE) $(VIRTUAL)
-	@ $(MAKE) $(SIP)
-	@ $(MAKE) $(PYQT)
-	@ clear
+#wikid:
+	#@$(CD) meta/wikid && $(MAKE)
 
-uninstall: clean
-	@-$(RM) $(PYQT) $(SIP) $(VENV)
-	@ clear
+push:
+	@-$(GITADD) && $(GITCOMMIT) "$(msg)" && $(GITPUSH)
 
-clean:
-	@-$(RM) $(CEXE)* $(MACRO)/*.def
-	@ clear
+run:
+	@-$(MAKE) graphviz
 
-freeze:
-	@ $(SETENV) && pip freeze > etc/python/requirements.txt
+sync:
+	@-$(MAKE) wiki.pull
+	@-$(MAKE) msg="make sync" push
 
-tdd:
-	@-rm -rf app/tdd
-	@-$(SETENV) && cd app && django-admin.py startproject tdd && \
-		cd tdd && python manage.py migrate && python manage.py runserver &
-	@-$(SETENV) && python $(TEST)/functional_tests.py
-	@-rm geckodriver.log
-	@-pkill -f firefox
-	@-kill `ps aux | grep 'manage.py runserver' | awk '{print $2}'` \
-		>/dev/null 2>/dev/null
-	@-rm -rf app/tdd
+venv:
+	@-$(RM) $(DOTVENV)
+	@-$(MKDIR) $(DOTVENV)
+	@-$(VENV) $(DOTVENV)
+	@-$(ACTVENV) && $(PIPINSTALL) -r $(PYREQ)
 
-test: $(TBINS)
+wiki.pull:
+	@-$(RM) $(VARWIKI)
+	@-$(CD) $(VAR) && $(GITCLONE) $(COREWIKI) wiki
+	@-$(RM) $(VARWIKI)/.git
+	@#$(RM) meta/wikid/static/
+	@#$(MKDIR) meta/wikid/static/
+	@#$(CD) meta/wikid/static && $(GITCLONE) $(COREWIKI) .
+	@#$(RM) meta/wikid/static/.git
 
-$(BIN)/darwin/%.test: $(OBJECTS)
-	@#-rm docs/atdlib/$*.dot
-	@-clang -std=c89 -I$(INCLUDE) test/$*.c $(OBJECTS) -o bin/darwin/$*.test
-	@-$(XMOD) bin/darwin/$*.test
-	@-bin/darwin/$*.test
-	@-rm $(BIN)/darwin/*.test
-	@#dot -Tpng docs/atdlib/$*.dot > var/img/$*.png
+wiki.push:
+	@-$(RM) $(DOTSWAP)
+	@-$(MKDIR) $(DOTSWAP)
+	@-$(CD) $(DOTSWAP) && $(GITCLONE) $(COREWIKI) wiki
+	@-$(RM) $(SWAPWIKI)/*.md
+	@-$(CP) $(VARWIKI)/*.md $(SWAPWIKI)/
+	@-$(CD) $(SWAPWIKI) && mkdir img
+	@-$(CP) -a $(VARWIKI)/img/. $(SWAPWIKI)/img/
+	@-$(CD) $(SWAPWIKI) && $(GITADD) && $(GITCOMMIT) "$(WIKIMSG)" && $(GITPUSH)
+	@-$(RM) $(DOTSWAP)
 
-vault: $(UI_GENERATED)
-	@-rm $(VAULT)/src/*.pyc
-	@-rm -rf $(VAULT)/src/atdlib
-	@-mkdir $(VAULT)/src/atdlib
-	@-touch $(VAULT)/src/atdlib/__init__.py
-	@-cp $(SRC)/vault.py $(VAULT)/src/atdlib/vault.py
-	@-$(SETENV) && python $(VAULT)/src/vault.py
-	@-rm $(VAULT)/src/*.pyc
-	@-rm -rf $(VAULT)/src/atdlib
-
-vault.sdk:
-	@-$(SETENV) && python src/vault.py
-
-$(VAULT)/src/ui_%.py: $(VAULT)/view/%.ui
-	@-$(SETENV) && $(VENV)/bin/pyuic4 -o $@ $<
-
-$(OBJ)/%.o: $(LIB)/%.c $(INCLUDE)/%.h
-	@-rm $(OBJ)/$*.o
-	@ $(CC) -std=c89 -Wall -g -I$(INCLUDE) -c $(LIB)/$*.c -o $(OBJ)/$*.o
-	@ clear
-
-$(VIRTUAL):
-	@-$(MKDIR) venv $(VIRTUAL)
-	@ $(NEWENV) $(VENV)
-	@ $(SETENV) && $(PIP) install -r $(REQUIRE)
-	@ clear
-
-$(PYQT):
-	@ cp $(EXT)/.cache/PyQt-mac-gpl-4.11.4.tar.gz $(EXT)/pyqt.tar.gz
-	@ gunzip $(EXT)/pyqt.tar.gz && tar -xvf $(EXT)/pyqt.tar
-	@-$(RM) $(EXT)/pyqt.tar
-	@ mv PyQt-mac-gpl-4.11.4 $(EXT)/pyqt
-	@ $(SETENV) && cd $(EXT)/pyqt && \
-	  python configure-ng.py --confirm-license --qmake=$(QMAKE) && \
-	  make && make install
-	@ clear
-
-$(SIP):
-	@ cp $(EXT)/.cache/sip-4.18.1.tar.gz $(EXT)/sip.tar.gz
-	@ gunzip $(EXT)/sip.tar.gz && tar -xvf $(EXT)/sip.tar
-	@-$(RM) $(EXT)/sip.tar
-	@ mv sip-4.18.1 $(EXT)/sip
-	@ $(SETENV) && cd $(EXT)/sip && \
-	  python configure.py --incdir=$(VENV)/include/python2.7 && \
-	  make && make install
-	@ clear
+#[endfi]

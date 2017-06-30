@@ -1,56 +1,18 @@
-export MAKEFLAGS   := --no-print-directory
-.DEFAULT_GOAL      := all
-.SUBLIME_TARGETS:     all
-.PHONY:               all\
-                      atdlib\
-                      build\
-                      clean\
-                      help\
-                      install\
-                      run\
-                      test\
-                      uninstall\
-                      vault
-APP                := $(CURDIR)/app
-BIN                := $(CURDIR)/bin
-ETC                := $(CURDIR)/etc
-EXT                := $(CURDIR)/ext
-INCLUDE            := $(CURDIR)/include
-LIB                := $(CURDIR)/lib
-OBJ                := $(CURDIR)/obj/darwin
-SRC                := $(CURDIR)/src
-TEST               := $(CURDIR)/test
-MACRO              := $(INCLUDE)/.macro
-VAULT              := $(APP)/vault
-VENV               := $(CURDIR)/venv/darwin
-FILES              := $(wildcard $(LIB)/*.c)
-TFILES             := $(wildcard $(TEST)/*.c)
-TBINS              := $(patsubst $(TEST)/%,$(BIN)/darwin/%,$(TFILES:.c=.test))
-OBJECTS            := $(patsubst $(LIB)/%,$(OBJ)/%,$(FILES:.c=.o))
-UI_GENERATED       := $(VAULT)/src/ui_mainwindow.py\
-                      $(VAULT)/src/ui_addgroup_dialog.py\
-                      $(VAULT)/src/ui_trezor_passphrase_dialog.py\
-                      $(VAULT)/src/ui_add_password_dialog.py\
-                      $(VAULT)/src/ui_initialize_dialog.py\
-                      $(VAULT)/src/ui_enter_pin_dialog.py\
-                      $(VAULT)/src/ui_trezor_chooser_dialog.py
-CC                 := clang
-CFLAGS             := -std=c89 -Wall -g
-CEXE               := $(BIN)/darwin/deos
-CINCLUDE           := -I$(VENV)/include/python2.7 -I$(MACRO)
-CLINK              := -lpython2.7
-CTARGET            := $(SRC)/main.c
-MKDIR              := mkdir
-NEWENV             := virtualenv --always-copy --no-site-packages
-PIP                := pip
-PYQT               := ext/pyqt
-RM                 := rm -rf
-SETENV             := source $(VENV)/bin/activate
-DEOS               := $(SETENV) && deos
-QMAKE              := /usr/local/Cellar/qt5/5.7.0/bin/qmake
-REQUIRE            := $(ETC)/python/requirements.txt
-SIP                := ext/sip
-VIRTUAL            := venv/darwin
-XMCC               := cd $(SRC) && python xmcc.py
-XMOD               := chmod +x
-
+include .env
+#[path]
+DOTVENV    := $(V)/.venv
+DOTSWAP    := $(V)/.swap
+SWAPWIKI   := $(DOTSWAP)/wiki
+VAR        := $(V)/var
+VARWIKI    := $(VAR)/wiki
+#[github]
+COREREPO   := git@github.com:libdeos/deos-core.git
+COREWIKI   := git@github.com:libdeos/deos-core.wiki.git
+WIKIMSG    := deos: wiki.sync
+#[python]
+ACTVENV    := source $(DOTVENV)/bin/activate
+PIPINSTALL := pip install
+PY         := python
+PYREQ      := requirements.txt
+VENV       := virtualenv --always-copy --no-site-packages
+#[endfi]

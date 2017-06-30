@@ -1,0 +1,28 @@
+$def with (permalink=None, data=None)
+<table>
+  <tbody>
+    <tr></tr>
+    <tr>
+      <td>
+        <h5>Table of Contents</h5>
+        $for item in data:
+          $if item['indent'] == 0: <b>﹂</b>
+          $elif item['indent'] == 3: <b>&nbsp;&nbsp;&nbsp;﹂</b>
+          $elif item['indent'] == 6: <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;﹂</b>
+          $if '](' in item['line']:
+            <a href="$:permalink#$:item['line'].split('](')[0].split('[')[1][1:-1].replace('.', '')">
+              <code>$:item['line'].split('](')[0].split('[')[1][1:-1]</code>
+            </a>
+          $elif '# ' in item['line']:
+            <a href="$:permalink#$:item['slug']">
+              $:item['line'].split('# ')[1]
+            </a>
+          $else:
+            <a href="$:permalink#$:item['slug']">
+              $:item['line']
+            </a>
+          <br>
+      </td>
+    </tr>
+  </tbody>
+</table>

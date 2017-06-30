@@ -1,0 +1,20 @@
+X("#!/usr/bin/env python\n" \
+  "# -*- coding: utf-8 -*-\n" \
+  "import web\n" \
+  "import yaml\n" \
+  "render = web.template.render('./templates/')\n" \
+  "render._add_global(render, 'render')\n" \
+  "def main():\n" \
+  "    data = {\n" \
+  "        'toc': None,\n" \
+  "        'author_name': 'Andrew DeSantis',\n" \
+  "        'author_email': 'atd@bitcoin.sh'\n" \
+  "    }\n" \
+  "    content = render.base(data)\n" \
+  "    with open('./var/wiki/index.md', 'w') as fp:\n" \
+  "        fp.write(str(content).replace('\\n\\n\\n', '\\n\\n'))\n" \
+  "    lines = open('./var/wiki/index.md').readlines()\n" \
+  "    open('./var/wiki/index.md', 'w').writelines(lines[1:])\n" \
+  "if __name__ == \"__main__\":\n" \
+  "    main()\n") 
+#undef X

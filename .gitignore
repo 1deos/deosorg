@@ -9,10 +9,13 @@ app/vault/ui_*py
 
 #[dotfolders]
 .backup/
+.keychain/
+.swap/
+.venv/
 
 #[folders]
 app/vault/src/atdlib/
-bin/
+dojo/
 etc/blockstack/*
 etc/zerotier/*
 ext/pyqt/
@@ -25,7 +28,6 @@ tests/blockstack/integration/*
 var/backup/*
 var/log/deos/*
 var/privkey/*
-venv/
 
 #[dotfiles]
 .DS_Store
@@ -48,3 +50,5 @@ src/example.sh
 !var/backup/.gitprivate
 !var/log/deos/.gitprivate
 !var/privkey/.gitprivate
+
+#[endfi]

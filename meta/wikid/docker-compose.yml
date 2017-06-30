@@ -1,0 +1,6 @@
+version: "2"
+services:
+  wikid:
+    build: .
+    volumes:
+      - .:/wiki
